@@ -1,0 +1,63 @@
+{
+  "CENTRAL_LR": {
+    "auroc": 0.6349575722309333,
+    "auprc": 0.18796904647874418,
+    "precision": 0.1656136320122535,
+    "recall": 0.511531638083974,
+    "f1": 0.25021695111368236,
+    "specificity": 0.6723554619953387,
+    "balanced_accuracy": 0.5919435500396564,
+    "brier_score": 0.22280189576826318,
+    "accuracy": 0.6542155816435432,
+    "confusion_matrix": {
+      "tn": 8943,
+      "fp": 4358,
+      "fn": 826,
+      "tp": 865
+    },
+    "training_time_sec": 0.19767403602600098,
+    "model_size_kb": 1.1865234375
+  },
+  "CENTRAL_MLP": {
+    "auroc": 0.63172053109927,
+    "auprc": 0.18606181228125995,
+    "precision": 0.16498251068791295,
+    "recall": 0.5020697811945595,
+    "f1": 0.24835454146555508,
+    "specificity": 0.6769415833395985,
+    "balanced_accuracy": 0.589505682267079,
+    "brier_score": 0.2152729034423828,
+    "accuracy": 0.657217182497332,
+    "confusion_matrix": {
+      "tn": 9004,
+      "fp": 4297,
+      "fn": 842,
+      "tp": 849
+    },
+    "training_time_sec": 67.06985783576965,
+    "model_size_kb": 19.50390625,
+    "parameter_count": 4993,
+    "estimated_int8_size_kb": 4.8759765625,
+    "inference_latency_ms": 0.9596371650695801,
+    "ram_usage_mb": 538.01953125
+  },
+  "CENTRAL_XGB": {
+    "auroc": 0.6288763631463307,
+    "auprc": 0.18712028519212784,
+    "precision": 0.16446644664466448,
+    "recall": 0.5304553518628031,
+    "f1": 0.25108467459762074,
+    "specificity": 0.657394180888655,
+    "balanced_accuracy": 0.593924766375729,
+    "brier_score": 0.22197502851486206,
+    "accuracy": 0.6430763073639274,
+    "confusion_matrix": {
+      "tn": 8744,
+      "fp": 4557,
+      "fn": 794,
+      "tp": 897
+    },
+    "training_time_sec": 3.243180751800537,
+    "model_size_kb": 321.44921875
+  }
+}

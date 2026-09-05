@@ -1,0 +1,46 @@
+{
+  "experiment_id": "FL_LR_NONIID_10",
+  "timestamp": "2026-08-30T23:16:06.228543",
+  "git_commit": "None",
+  "random_seed": 42,
+  "Python_version": "3.13.1 (tags/v3.13.1:0671451, Dec  3 2024, 19:06:28) [MSC v.1942 64 bit (AMD64)]",
+  "model_type": "lr",
+  "client_count": 10,
+  "partition_method": "non_iid",
+  "dirichlet_alpha": 0.5,
+  "simulation_duration_sec": 72.17140674591064,
+  "dp_enabled": false,
+  "dp_mode": "None",
+  "noise_multiplier": 0.0,
+  "actual_epsilon": "N/A",
+  "delta": "N/A",
+  "compression_enabled": false,
+  "compression_ratio": 1.0,
+  "model_stats": {
+    "parameter_count": 45,
+    "theoretical_fp32_size_kb": 0.17578125,
+    "theoretical_int8_size_kb": 0.0439453125,
+    "serialized_checkpoint_size_kb": 2.1220703125
+  },
+  "metrics": {
+    "auroc": 0.6288919896432277,
+    "auprc": 0.1808472936489796,
+    "f1": 0.24825504621769479,
+    "precision": 0.1776937618147448,
+    "recall": 0.4117647058823529,
+    "specificity": 0.7673441320293398,
+    "accuracy": 0.7286531390439874,
+    "brier_score": 0.2216479331254959,
+    "confusion_matrix": {
+      "tn": 10043,
+      "fp": 3045,
+      "fn": 940,
+      "tp": 658
+    }
+  },
+  "communication": {
+    "total_bytes_transmitted": 36000,
+    "bytes_upstream": 18000,
+    "bytes_downstream": 18000
+  }
+}

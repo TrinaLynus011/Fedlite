@@ -1,0 +1,13 @@
+rounds: 10
+local_epochs: 3
+local_batch_size: 128
+local_learning_rate: 0.005
+
+client_counts: [5, 10]
+
+partitioning:
+  iid:
+    enabled: true
+  non_iid:
+    enabled: true
+    alphas: [0.1, 0.5, 1.0]  # Dirichlet concentration parameters

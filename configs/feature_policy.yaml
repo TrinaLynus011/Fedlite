@@ -1,0 +1,151 @@
+features:
+  encounter_id:
+    classification: "EXCLUDED"
+    reason: "Arbitrary administrative identifier. Using it would lead to model memorization."
+  patient_nbr:
+    classification: "EXCLUDED"
+    reason: "Patient identifier. Used strictly for patient-level partitioning and splitting to prevent data leakage."
+  weight:
+    classification: "EXCLUDED"
+    reason: "High missingness (>96%). Imputing would introduce severe noise."
+  payer_code:
+    classification: "EXCLUDED"
+    reason: "Administrative insurance code. Lacks clinical relevance to patient readmission risk."
+  discharge_disposition_id:
+    classification: "POTENTIAL_LEAKAGE"
+    reason: "Contains codes indicating patient expired or went to hospice. Evaluated and filtered prior to training."
+  readmitted:
+    classification: "TARGET"
+    reason: "Label indicating 30-day readmission status."
+  race:
+    classification: "ELIGIBLE"
+    reason: "Demographic background, clinically relevant for subgroup evaluation."
+  gender:
+    classification: "ELIGIBLE"
+    reason: "Biological sex, clinically relevant."
+  age:
+    classification: "ELIGIBLE"
+    reason: "Age bracket, strongly associated with baseline health and readmission risk."
+  admission_type_id:
+    classification: "ELIGIBLE"
+    reason: "Categorical variable representing type of admission (e.g. emergency vs elective)."
+  admission_source_id:
+    classification: "ELIGIBLE"
+    reason: "Categorical variable representing source of admission referral."
+  time_in_hospital:
+    classification: "ELIGIBLE"
+    reason: "Length of stay, indicator of illness severity."
+  medical_specialty:
+    classification: "ELIGIBLE"
+    reason: "Primary specialty of admitting physician."
+  num_lab_procedures:
+    classification: "ELIGIBLE"
+    reason: "Total number of lab tests performed during visit."
+  num_procedures:
+    classification: "ELIGIBLE"
+    reason: "Number of non-lab procedures performed during visit."
+  num_medications:
+    classification: "ELIGIBLE"
+    reason: "Number of distinct generic medications prescribed."
+  number_outpatient:
+    classification: "ELIGIBLE"
+    reason: "Number of outpatient visits in the preceding year."
+  number_emergency:
+    classification: "ELIGIBLE"
+    reason: "Number of emergency visits in the preceding year."
+  number_inpatient:
+    classification: "ELIGIBLE"
+    reason: "Number of inpatient visits in the preceding year."
+  diag_1:
+    classification: "ELIGIBLE"
+    reason: "Primary ICD-9 diagnosis code."
+  diag_2:
+    classification: "ELIGIBLE"
+    reason: "Secondary ICD-9 diagnosis code."
+  diag_3:
+    classification: "ELIGIBLE"
+    reason: "Tertiary ICD-9 diagnosis code."
+  number_diagnoses:
+    classification: "ELIGIBLE"
+    reason: "Total number of diagnoses entered."
+  max_glu_serum:
+    classification: "ELIGIBLE"
+    reason: "Glucose serum test result indicator."
+  A1Cresult:
+    classification: "ELIGIBLE"
+    reason: "HbA1c test result indicator."
+  metformin:
+    classification: "ELIGIBLE"
+    reason: "Metformin administration/dose change."
+  repaglinide:
+    classification: "ELIGIBLE"
+    reason: "Repaglinide administration/dose change."
+  nateglinide:
+    classification: "ELIGIBLE"
+    reason: "Nateglinide administration/dose change."
+  chlorpropamide:
+    classification: "ELIGIBLE"
+    reason: "Chlorpropamide administration/dose change."
+  glimepiride:
+    classification: "ELIGIBLE"
+    reason: "Glimepiride administration/dose change."
+  acetohexamide:
+    classification: "ELIGIBLE"
+    reason: "Acetohexamide administration/dose change."
+  glipizide:
+    classification: "ELIGIBLE"
+    reason: "Glipizide administration/dose change."
+  glyburide:
+    classification: "ELIGIBLE"
+    reason: "Glyburide administration/dose change."
+  tolbutamide:
+    classification: "ELIGIBLE"
+    reason: "Tolbutamide administration/dose change."
+  pioglitazone:
+    classification: "ELIGIBLE"
+    reason: "Pioglitazone administration/dose change."
+  rosiglitazone:
+    classification: "ELIGIBLE"
+    reason: "Rosiglitazone administration/dose change."
+  acarbose:
+    classification: "ELIGIBLE"
+    reason: "Acarbose administration/dose change."
+  miglitol:
+    classification: "ELIGIBLE"
+    reason: "Miglitol administration/dose change."
+  troglitazone:
+    classification: "ELIGIBLE"
+    reason: "Troglitazone administration/dose change."
+  tolazamide:
+    classification: "ELIGIBLE"
+    reason: "Tolazamide administration/dose change."
+  examide:
+    classification: "ELIGIBLE"
+    reason: "Examide administration/dose change."
+  citoglipton:
+    classification: "ELIGIBLE"
+    reason: "Citoglipton administration/dose change."
+  insulin:
+    classification: "ELIGIBLE"
+    reason: "Insulin administration/dose change."
+  glyburide-metformin:
+    classification: "ELIGIBLE"
+    reason: "Combination drug administration/dose change."
+  glipizide-metformin:
+    classification: "ELIGIBLE"
+    reason: "Combination drug administration/dose change."
+  glimepiride-pioglitazone:
+    classification: "ELIGIBLE"
+    reason: "Combination drug administration/dose change."
+  metformin-rosiglitazone:
+    classification: "ELIGIBLE"
+    reason: "Combination drug administration/dose change."
+  metformin-pioglitazone:
+    classification: "ELIGIBLE"
+    reason: "Combination drug administration/dose change."
+  change:
+    classification: "ELIGIBLE"
+    reason: "Indicates if there was a change in diabetic medications."
+  diabetesMed:
+    classification: "ELIGIBLE"
+    reason: "Indicates if any diabetic medication was prescribed."

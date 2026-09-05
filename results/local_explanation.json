@@ -1,0 +1,40 @@
+{
+  "encounter_id": "Anonymized Encounter",
+  "predicted_risk_probability": 0.8956666588783264,
+  "risk_classification": 1,
+  "top_positive_contributors": [
+    {
+      "Feature": "Admission Referral Source",
+      "SHAP_Value": 0.003959719420433807
+    },
+    {
+      "Feature": "Patient Gender",
+      "SHAP_Value": 0.005172370653526718
+    },
+    {
+      "Feature": "HbA1c Test Result",
+      "SHAP_Value": 0.005982882712788161
+    },
+    {
+      "Feature": "Secondary Diagnosis (ICD-9)",
+      "SHAP_Value": 0.014149713292851722
+    },
+    {
+      "Feature": "Primary Diagnosis (ICD-9)",
+      "SHAP_Value": 0.01847612464951028
+    },
+    {
+      "Feature": "Patient Age Bracket",
+      "SHAP_Value": 0.03783604703780729
+    },
+    {
+      "Feature": "Emergency Visits in Preceding Year",
+      "SHAP_Value": 0.07186740798093598
+    },
+    {
+      "Feature": "Inpatient Visits in Preceding Year",
+      "SHAP_Value": 0.31224909543784807
+    }
+  ],
+  "top_negative_contributors": []
+}

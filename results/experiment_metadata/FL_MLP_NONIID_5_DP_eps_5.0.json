@@ -1,0 +1,62 @@
+{
+  "experiment_id": "FL_MLP_NONIID_5_DP_eps_5.0",
+  "status": "DIAGNOSTIC_FAILED",
+  "status_reason": "The experiment label 'eps_5.0' was inherited from the old DP-SGD accountant (which used Poisson subsampling amplification q^2 ~ 8.45e-5). The new correct accountant for the client-update Gaussian mechanism has no subsampling amplification. With sigma=0.8, T=10 rounds, delta=1e-5, the actual epsilon under the client-update Gaussian mechanism is 26.7807, not ~5. The noise magnitude (std=0.8 per coordinate, noise L2 norm ~ 56.5 per client) overwhelms the clipped signal (L2 norm = 1.0 after C=1.0 clip), producing AUROC ~ 0.50 (random chance). This experiment is retained as a diagnostic record. Do not use its metrics for any comparison table.",
+  "timestamp": "2026-08-22T10:38:25.717313",
+  "git_commit": "None",
+  "random_seed": 42,
+  "Python_version": "3.13.1 (tags/v3.13.1:0671451, Dec  3 2024, 19:06:28) [MSC v.1942 64 bit (AMD64)]",
+  "model_type": "mlp",
+  "client_count": 5,
+  "partition_method": "non_iid",
+  "dirichlet_alpha": 0.5,
+  "privacy": {
+    "dp_enabled": true,
+    "mechanism": "client_update_gaussian",
+    "privacy_unit": "client",
+    "clipping_norm": 1.0,
+    "noise_multiplier": 0.8,
+    "delta": 1e-05,
+    "epsilon": 26.78071407518023,
+    "rounds_accounted": 10,
+    "participating_clients": 5,
+    "invalid_label_claimed": "eps_5.0",
+    "invalid_label_source": "old DP-SGD accountant with subsampling amplification q^2 ~ 8.45e-5",
+    "invalid_label_epsilon_dpsgd": 3.3684200864542304,
+    "note": "The epsilon=3.37 in the original metadata was computed by the deprecated compute_epsilon() function using the subsampled Gaussian mechanism formula. This is INVALID for the client-update Gaussian mechanism, which has no subsampling step. Correct epsilon = 26.7807."
+  },
+  "metrics": {
+    "auroc": 0.5082,
+    "auprc": 0.1105,
+    "precision": 0.1110,
+    "recall": 0.8091,
+    "f1": 0.1952,
+    "specificity": null,
+    "balanced_accuracy": null,
+    "brier_score": null,
+    "accuracy": null,
+    "per_round_telemetry": [
+      {"round": 1,  "val_auroc": 0.5292, "val_auprc": 0.1192, "val_loss": 16.8773},
+      {"round": 2,  "val_auroc": 0.4969, "val_auprc": 0.1086, "val_loss": 52.9145},
+      {"round": 3,  "val_auroc": 0.4646, "val_auprc": 0.1004, "val_loss": 118.1233},
+      {"round": 4,  "val_auroc": 0.5159, "val_auprc": 0.1145, "val_loss": 120.1088},
+      {"round": 5,  "val_auroc": 0.5049, "val_auprc": 0.1101, "val_loss": 232.4057},
+      {"round": 6,  "val_auroc": 0.4935, "val_auprc": 0.1085, "val_loss": 67.6528},
+      {"round": 7,  "val_auroc": 0.4940, "val_auprc": 0.1077, "val_loss": 673.6389},
+      {"round": 8,  "val_auroc": 0.4931, "val_auprc": 0.1075, "val_loss": 880.7407},
+      {"round": 9,  "val_auroc": 0.4969, "val_auprc": 0.1083, "val_loss": 1237.9308},
+      {"round": 10, "val_auroc": 0.5082, "val_auprc": 0.1105, "val_loss": 1679.9998}
+    ],
+    "simulation_time_sec": 142.62449479103088
+  },
+  "communication": {
+    "bytes_upstream": 998600,
+    "bytes_downstream": 998600,
+    "total_bytes": 1997200
+  },
+  "compression_enabled": false,
+  "compression_ratio": 1.0,
+  "model_stats": {
+    "parameter_count": 4993
+  }
+}

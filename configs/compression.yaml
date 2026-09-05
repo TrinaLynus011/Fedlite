@@ -1,0 +1,7 @@
+enabled: true
+ratios:
+  - 1.0   # Full update (100% parameters transmitted)
+  - 0.5   # Top-K 50%
+  - 0.25  # Top-K 25%
+  - 0.1   # Top-K 10%
+  - 0.01  # Top-K 1%

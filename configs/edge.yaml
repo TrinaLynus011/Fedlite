@@ -1,0 +1,6 @@
+simulation:
+  enabled: true
+  ram_limit_mb: 256
+  cpu_threads: 2
+  model_size_limit_kb: 500
+  latency_target_ms: 50

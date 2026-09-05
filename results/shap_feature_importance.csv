@@ -1,0 +1,45 @@
+Feature,Readable_Feature,Mean_Abs_SHAP
+diag_1,Primary Diagnosis (ICD-9),0.04730857902441886
+diag_2,Secondary Diagnosis (ICD-9),0.04357289007970965
+diag_3,Tertiary Diagnosis (ICD-9),0.042275205829431305
+number_inpatient,Inpatient Visits in Preceding Year,0.03848179492857984
+age,Patient Age Bracket,0.021358526804290828
+num_medications,Number of Prescribed Medications,0.011538979481419092
+A1Cresult,HbA1c Test Result,0.011018772875664525
+diabetesMed,Any Diabetic Medication Prescribed,0.009485754152144673
+medical_specialty,Admitting Physician Specialty,0.009150601933921228
+race,Patient Race,0.0091405723370513
+number_emergency,Emergency Visits in Preceding Year,0.004362380836996171
+number_diagnoses,Total Number of Diagnoses,0.0042069772968012595
+gender,Patient Gender,0.0030181513300636597
+admission_source_id,Admission Referral Source,0.0029700414939867015
+num_procedures,Number of Clinical Procedures,0.0027754125848682854
+number_outpatient,Outpatient Visits in Preceding Year,0.002140615091920379
+glimepiride,Glimepiride Therapy Status,0.0020309335608066463
+time_in_hospital,Length of Hospital Stay (Days),0.0019524913120014514
+change,Any Medication Change Indicator,0.001908273151347524
+num_lab_procedures,Number of Laboratory Procedures,0.001758504349447584
+admission_type_id,Admission Type Code,0.0015721823727182086
+insulin,Insulin Therapy Status,0.0015005101690553193
+max_glu_serum,Glucose Serum Test Result,0.0014857188805801195
+pioglitazone,Pioglitazone Therapy Status,0.0013461403958648368
+glipizide,Glipizide Therapy Status,0.0011062835478024868
+metformin,Metformin Therapy Status,0.0009375039961424162
+rosiglitazone,Rosiglitazone Therapy Status,0.0003610966759779391
+glyburide,Glyburide Therapy Status,0.00033384008217666875
+acarbose,Acarbose Therapy Status,0.00011871414907336703
+tolbutamide,Tolbutamide Therapy Status,0.0
+nateglinide,Nateglinide Therapy Status,0.0
+chlorpropamide,Chlorpropamide Therapy Status,0.0
+repaglinide,Repaglinide Therapy Status,0.0
+acetohexamide,Acetohexamide Therapy Status,0.0
+troglitazone,Troglitazone Therapy Status,0.0
+miglitol,Miglitol Therapy Status,0.0
+citoglipton,Citoglipton Therapy Status,0.0
+examide,Examide Therapy Status,0.0
+tolazamide,Tolazamide Therapy Status,0.0
+glyburide-metformin,Glyburide-Metformin Therapy Status,0.0
+glimepiride-pioglitazone,Glimepiride-Pioglitazone Therapy Status,0.0
+glipizide-metformin,Glipizide-Metformin Therapy Status,0.0
+metformin-pioglitazone,Metformin-Pioglitazone Therapy Status,0.0
+metformin-rosiglitazone,Metformin-Rosiglitazone Therapy Status,0.0

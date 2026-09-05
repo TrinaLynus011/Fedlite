@@ -1,0 +1,25 @@
+{
+  "random_seed": 42,
+  "splits": {
+    "train": {
+      "patients": 48993,
+      "encounters": 69665,
+      "positive_prevalence": 0.11519414340055982
+    },
+    "validation": {
+      "patients": 10498,
+      "encounters": 14686,
+      "positive_prevalence": 0.10881111262426801
+    },
+    "test": {
+      "patients": 10499,
+      "encounters": 14992,
+      "positive_prevalence": 0.11279348986125934
+    }
+  },
+  "overlaps": {
+    "train_val": 0,
+    "train_test": 0,
+    "val_test": 0
+  }
+}

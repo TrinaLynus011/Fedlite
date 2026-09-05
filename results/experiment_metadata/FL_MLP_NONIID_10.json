@@ -1,0 +1,46 @@
+{
+  "experiment_id": "FL_MLP_NONIID_10",
+  "timestamp": "2026-08-30T23:30:03.831057",
+  "git_commit": "None",
+  "random_seed": 42,
+  "Python_version": "3.13.1 (tags/v3.13.1:0671451, Dec  3 2024, 19:06:28) [MSC v.1942 64 bit (AMD64)]",
+  "model_type": "mlp",
+  "client_count": 10,
+  "partition_method": "non_iid",
+  "dirichlet_alpha": 0.5,
+  "simulation_duration_sec": 228.71476030349731,
+  "dp_enabled": false,
+  "dp_mode": "None",
+  "noise_multiplier": 0.0,
+  "actual_epsilon": "N/A",
+  "delta": "N/A",
+  "compression_enabled": false,
+  "compression_ratio": 1.0,
+  "model_stats": {
+    "parameter_count": 4993,
+    "theoretical_fp32_size_kb": 19.50390625,
+    "theoretical_int8_size_kb": 4.8759765625,
+    "serialized_checkpoint_size_kb": 22.7353515625
+  },
+  "metrics": {
+    "auroc": 0.6096004403426043,
+    "auprc": 0.16477758489778893,
+    "f1": 0.23599845500193126,
+    "precision": 0.17067039106145251,
+    "recall": 0.38235294117647056,
+    "specificity": 0.77315097799511,
+    "accuracy": 0.7306278087974942,
+    "brier_score": 0.20180988311767578,
+    "confusion_matrix": {
+      "tn": 10119,
+      "fp": 2969,
+      "fn": 987,
+      "tp": 611
+    }
+  },
+  "communication": {
+    "total_bytes_transmitted": 3994400,
+    "bytes_upstream": 1997200,
+    "bytes_downstream": 1997200
+  }
+}

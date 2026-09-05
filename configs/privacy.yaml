@@ -1,0 +1,71 @@
+# FedLite-Care Privacy Configuration
+# ====================================
+#
+# ACTIVE MECHANISM: DP-SGD  (record-level privacy)
+# ─────────────────────────────────────────────────
+# Privacy unit : individual RECORD (patient encounter)
+# Per-batch training loop:
+#   1. Individual backward pass for each record i in batch B.
+#   2. Clip per-record gradient  ĝ_i = g_i · min(1, C / ‖g_i‖₂)
+#   3. Aggregate: G = Σ ĝ_i + N(0, (σ·C)² I)
+#   4. Optimizer step: θ ← θ − lr · G / B
+# No additional noise is added to the completed model update Δθ.
+#
+# ACCOUNTANT: Subsampled Gaussian (Rényi DP, tight 2nd-order bound)
+#   q = batch_size / client_dataset_size
+#   T = rounds × local_epochs × ⌈client_dataset_size / batch_size⌉
+#   RDP(α) ≤ (1/(α−1))·log(1 + q²·α(α−1)/2·(exp(α(α−1)/(2σ²))−1))
+#   ε = min_α [ T·RDP(α) + log(1/δ)/(α−1) ]
+#
+# See: Mironov (2017), Abadi et al. (2016).
+#
+# CALIBRATION NOTE (IID-5, T=10, E=3, B=128, n=13933 per client,
+#                   tight 2nd-order subsampled Gaussian RDP):
+#   sigma=0.8  => epsilon ~ 11.67   (pilot experiment — high epsilon)
+#   sigma=1.5  => epsilon ~  6.87
+#   sigma=2.3  => epsilon ~  5.00   (closest to eps=5)
+#   sigma=4.0  => epsilon ~  3.44
+#
+# Epsilon values are REPORTED from the accountant after training.
+# They are not pre-specified budget caps.
+#
+# PREVIOUS MECHANISM (DIAGNOSTIC / CALIBRATION ONLY — DO NOT USE):
+# Client-Update Gaussian (privacy_unit=client) produced AUROC~0.50 at
+# all practically useful epsilon levels. Diagnostic results archived in
+# results/experiment_metadata/FL_MLP_NONIID_5_DP_eps_5.0.json and
+# results/dp_calibration_results.json.
+
+privacy:
+  enabled: false                   # set to true in dp_config at runtime
+  mechanism: dpsgd                 # active: dpsgd | diagnostic: client_update_gaussian
+  privacy_unit: record             # RECORD (patient encounter) — not client/hospital
+  clipping_norm: 1.0               # per-record gradient L2 sensitivity C
+  noise_multiplier: 0.8            # σ: noise_std = σ · C
+  delta: 1.0e-5                    # target δ for (ε, δ)-DP
+  max_rounds: 10                   # rounds used in accounting
+
+  # Experiment grid — labelled by noise_multiplier (sigma).
+  # Epsilon is the OUTPUT of the accountant, not the input.
+  # Values below are computed by compute_dpsgd_epsilon() with:
+  #   rounds=10, local_epochs=3, batch_size=128,
+  #   dataset_size=13933 (= int(69665/5)), delta=1e-5
+  # tight 2nd-order subsampled Gaussian RDP (Mironov 2017 Thm 8).
+  budgets:
+    - label: "sigma_0.8"
+      noise_multiplier: 0.8
+      expected_epsilon_T10_IID5: 11.67
+      note: "Pilot experiment. High epsilon — establishes utility baseline under DP-SGD."
+    - label: "sigma_1.5"
+      noise_multiplier: 1.5
+      expected_epsilon_T10_IID5: 6.87
+    - label: "sigma_2.3"
+      noise_multiplier: 2.3
+      expected_epsilon_T10_IID5: 4.997
+      note: "Closest sigma to epsilon=5 under the tight 2nd-order accountant."
+    - label: "sigma_4.0"
+      noise_multiplier: 4.0
+      expected_epsilon_T10_IID5: 3.44
+    - label: "No_DP"
+      noise_multiplier: 0.0
+      expected_epsilon_T10_IID5: null
+      note: "No privacy guarantee. Baseline reference only."

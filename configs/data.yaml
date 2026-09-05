@@ -1,0 +1,11 @@
+raw_data_path: "Dataset/diabetes_130_raw.csv"
+processed_dir: "data/processed"
+patient_col: "patient_nbr"
+encounter_col: "encounter_id"
+target_col: "readmitted"
+split:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  seed: 42
+discharge_disposition_leakage_ids: [11, 13, 14, 19, 20, 21]

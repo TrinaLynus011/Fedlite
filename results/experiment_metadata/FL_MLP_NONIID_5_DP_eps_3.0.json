@@ -1,0 +1,111 @@
+{
+  "experiment_id": "FL_MLP_NONIID_5_DP_eps_3.0",
+  "timestamp": "2026-08-22T10:35:57.773115",
+  "git_commit": "None",
+  "random_seed": 42,
+  "Python_version": "3.13.1 (tags/v3.13.1:0671451, Dec  3 2024, 19:06:28) [MSC v.1942 64 bit (AMD64)]",
+  "model_type": "mlp",
+  "client_count": 5,
+  "partition_method": "non_iid",
+  "dirichlet_alpha": 0.5,
+  "dp_enabled": true,
+  "clipping_norm": 1.0,
+  "noise_multiplier": 1.5,
+  "actual_epsilon": 1.7420472020211117,
+  "delta": 1e-05,
+  "metrics": {
+    "auroc": 0.494237393212544,
+    "auprc": 0.1116503171093136,
+    "precision": 0.11147840765227177,
+    "recall": 0.9373151981076286,
+    "f1": 0.19925828147589414,
+    "specificity": 0.05022178783550109,
+    "balanced_accuracy": 0.4937684929715649,
+    "brier_score": 0.8496944308280945,
+    "accuracy": 0.1502801494130203,
+    "confusion_matrix": {
+      "tn": 668,
+      "fp": 12633,
+      "fn": 106,
+      "tp": 1585
+    },
+    "simulation_time_sec": 164.00715708732605,
+    "communication": {
+      "bytes_upstream": 998600,
+      "bytes_downstream": 998600,
+      "total_bytes": 1997200,
+      "telemetry_by_round": [
+        {
+          "round": 1,
+          "clients_participated": 5,
+          "bytes_upstream": 99860,
+          "bytes_downstream": 99860,
+          "total_bytes": 199720
+        },
+        {
+          "round": 2,
+          "clients_participated": 5,
+          "bytes_upstream": 99860,
+          "bytes_downstream": 99860,
+          "total_bytes": 199720
+        },
+        {
+          "round": 3,
+          "clients_participated": 5,
+          "bytes_upstream": 99860,
+          "bytes_downstream": 99860,
+          "total_bytes": 199720
+        },
+        {
+          "round": 4,
+          "clients_participated": 5,
+          "bytes_upstream": 99860,
+          "bytes_downstream": 99860,
+          "total_bytes": 199720
+        },
+        {
+          "round": 5,
+          "clients_participated": 5,
+          "bytes_upstream": 99860,
+          "bytes_downstream": 99860,
+          "total_bytes": 199720
+        },
+        {
+          "round": 6,
+          "clients_participated": 5,
+          "bytes_upstream": 99860,
+          "bytes_downstream": 99860,
+          "total_bytes": 199720
+        },
+        {
+          "round": 7,
+          "clients_participated": 5,
+          "bytes_upstream": 99860,
+          "bytes_downstream": 99860,
+          "total_bytes": 199720
+        },
+        {
+          "round": 8,
+          "clients_participated": 5,
+          "bytes_upstream": 99860,
+          "bytes_downstream": 99860,
+          "total_bytes": 199720
+        },
+        {
+          "round": 9,
+          "clients_participated": 5,
+          "bytes_upstream": 99860,
+          "bytes_downstream": 99860,
+          "total_bytes": 199720
+        },
+        {
+          "round": 10,
+          "clients_participated": 5,
+          "bytes_upstream": 99860,
+          "bytes_downstream": 99860,
+          "total_bytes": 199720
+        }
+      ]
+    }
+  }
+}
