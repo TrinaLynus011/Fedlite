@@ -19,7 +19,7 @@
     "bytes_downstream": 39944,
     "total_bytes": 79888,
     "compression_ratio": 1.0,
-    "training_time_sec": 128.43553566932678,
+    "training_time_sec": 269.94041776657104,
     "mean_grad_norm": 9.75068016747268,
     "median_grad_norm": 0.11596599403712507,
     "frac_clipped": 0.14657289299698262,
