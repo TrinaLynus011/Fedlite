@@ -38,6 +38,7 @@ from utils.metrics import calculate_metrics, save_evaluation_plots
 from data.partition import partition_data
 from federated.client import FedLiteClient
 from privacy.dp_mechanism import compute_client_update_epsilon, compute_dpsgd_epsilon
+from federated.adaptive_controller import AdaptiveFederatedController
 
 def get_evaluate_fn(model_type, input_dim, hidden_dims, X_val, y_val):
     """
@@ -203,7 +204,28 @@ def run_federated_simulation(experiment_id, model_type="mlp", client_count=5,
     round_telemetry = []
     federated_round_metrics = []
     
+    # Initialize Adaptive Controller
+    controller = AdaptiveFederatedController(config_path="configs/adaptive_controller.yaml")
+    adaptive_mode = bool(controller.enabled)
+
+    # Track privacy state across rounds
+    accumulated_local_epochs = 0
+    cumulative_bytes = 0
+
+    # Default adaptive configuration (static mode fallback)
+    current_adaptive_config = {
+        "compression_ratio": float(compression_config.get("ratio", 1.0)) if compression_config and compression_config.get("enabled") else 1.0,
+        "local_epochs": local_epochs,
+        "participation_fraction": 1.0
+    }
+    controller_history = []
+    
     for r in range(1, rounds + 1):
+        # 0. Check if controller signaled a stop
+        if current_adaptive_config is None:
+            print(f"Simulation stopped by adaptive controller at round {r}.")
+            break
+            
         client_updates = []
         total_fit_samples = 0
         round_sent = 0
@@ -213,8 +235,32 @@ def run_federated_simulation(experiment_id, model_type="mlp", client_count=5,
         round_mean_grad_norms   = []
         round_median_grad_norms = []
         round_frac_clipped      = []
-
-        for idx, client in enumerate(clients):
+        
+        # 1. Evaluate Client Participation
+        participation_frac = current_adaptive_config.get("participation_fraction", 1.0)
+        num_participants = max(1, int(client_count * participation_frac))
+        
+        # Deterministic client selection based on round seed
+        rng = np.random.default_rng(seed + r * 777)
+        participating_indices = rng.choice(client_count, num_participants, replace=False)
+        participating_clients_list = [clients[i] for i in participating_indices]
+        
+        # Track accumulated epochs for privacy accounting
+        accumulated_local_epochs += current_adaptive_config.get("local_epochs", local_epochs)
+        
+        for idx in participating_indices:
+            client = clients[idx]
+            
+            # Apply dynamic parameters to client
+            client.local_epochs = current_adaptive_config.get("local_epochs", local_epochs)
+            if client.compression_config is None:
+                client.compression_config = {"enabled": False}
+            client.compression_config["ratio"] = current_adaptive_config.get("compression_ratio", 1.0)
+            if client.compression_config["ratio"] < 1.0:
+                client.compression_config["enabled"] = True
+            else:
+                client.compression_config["enabled"] = False
+                
             # Broadcast global parameters to client (server -> client)
             # Downstream byte count (all layers parameters as 32-bit floats)
             param_count = sum(p.size for p in global_parameters)
@@ -253,12 +299,40 @@ def run_federated_simulation(experiment_id, model_type="mlp", client_count=5,
         print(f"Round {r:02d}/{rounds:02d} - Loss: {val_loss:.4f} | Val AUROC: {val_metrics['auroc']:.4f} | Val AUPRC: {val_metrics['auprc']:.4f}")
         
         # Collect client details
-        participating_clients = len(clients)
-        total_client_samples = sum(len(c.train_dataset) for c in clients)
+        participating_clients = len(participating_clients_list)
+        total_client_samples = sum(len(c.train_dataset) for c in participating_clients_list)
+        
+        cumulative_bytes += round_sent + round_recv
+        
+        # Calculate Round Epsilon (Privacy Tracking)
+        dp_enabled    = (dp_config or {}).get("enabled", False)
+        mechanism     = (dp_config or {}).get("mechanism", "dpsgd")
+        noise_mult    = float((dp_config or {}).get("noise_multiplier", 0.0))
+        delta         = float((dp_config or {}).get("delta", 1e-5))
+        round_epsilon = None
+        
+        if dp_enabled and noise_mult > 0.0:
+            if mechanism == "dpsgd":
+                avg_client_size = int(len(X_train) / client_count)
+                round_epsilon, _ = compute_dpsgd_epsilon(
+                    rounds=1, # we pass 1 round and the accumulated epochs
+                    local_epochs=accumulated_local_epochs,
+                    batch_size=batch_size,
+                    dataset_size=avg_client_size,
+                    noise_multiplier=noise_mult,
+                    delta=delta,
+                )
+            elif mechanism == "client_update_gaussian":
+                round_epsilon = compute_client_update_epsilon(
+                    rounds=r,
+                    noise_multiplier=noise_mult,
+                    delta=delta,
+                )
         
         # Collect round-by-round validation metrics
         round_metrics_dict = {
             "round": r,
+            "mode": "adaptive" if adaptive_mode else "static",
             "validation_loss": val_loss,
             "val_auroc": val_metrics["auroc"],
             "val_auprc": val_metrics["auprc"],
@@ -283,8 +357,54 @@ def run_federated_simulation(experiment_id, model_type="mlp", client_count=5,
             "frac_clipped":     float(np.mean(round_frac_clipped))      if round_frac_clipped      else None,
             "clipping_norm":    float((dp_config or {}).get("clipping_norm", 1.0)) if (dp_config or {}).get("enabled", False) else None,
             "noise_multiplier": float((dp_config or {}).get("noise_multiplier", 0.0)) if (dp_config or {}).get("enabled", False) else None,
+            "epsilon":          round_epsilon,
+            "cumulative_bytes": cumulative_bytes,
+            "privacy_budget": controller.privacy_config.get("budget_epsilon") if controller.enabled else None,
+            "privacy_remaining": None,
+            "communication_budget": controller.comm_config.get("budget_bytes") if controller.enabled else None,
+            "communication_remaining": None,
+            "previous_configuration": dict(current_adaptive_config),
+            "selected_compression_ratio": current_adaptive_config["compression_ratio"],
+            "selected_local_epochs": current_adaptive_config["local_epochs"],
+            "selected_participation_fraction": current_adaptive_config["participation_fraction"],
+            "controller_decision": None,
+            "controller_mode": "adaptive" if adaptive_mode else "static",
         }
+
+        if controller.privacy_config.get("budget_epsilon") is not None and round_metrics_dict.get("epsilon") is not None:
+            budget = float(controller.privacy_config.get("budget_epsilon"))
+            round_metrics_dict["privacy_remaining"] = max(0.0, budget - float(round_metrics_dict["epsilon"]))
+        if controller.comm_config.get("budget_bytes") is not None:
+            budget_bytes = float(controller.comm_config.get("budget_bytes"))
+            round_metrics_dict["communication_remaining"] = max(0.0, budget_bytes - float(cumulative_bytes))
+
+        # --- ADAPTIVE CONTROLLER OBSERVE & SELECT ---
+        if controller.enabled:
+            controller.observe(round_metrics_dict)
+            next_config, decision_metadata = controller.select_next_configuration(state=round_metrics_dict)
+            round_metrics_dict["controller_decision"] = decision_metadata
+            round_metrics_dict["selected_compression_ratio"] = next_config["compression_ratio"] if next_config else round_metrics_dict["selected_compression_ratio"]
+            round_metrics_dict["selected_local_epochs"] = next_config["local_epochs"] if next_config else round_metrics_dict["selected_local_epochs"]
+            round_metrics_dict["selected_participation_fraction"] = next_config["participation_fraction"] if next_config else round_metrics_dict["selected_participation_fraction"]
+            round_metrics_dict["decision_score"] = decision_metadata.get("selected_score") if decision_metadata else None
+            if next_config is None:
+                print(f"Adaptive controller stopped after round {r}.")
+                current_adaptive_config = None
+            else:
+                current_adaptive_config = next_config
+        
         federated_round_metrics.append(round_metrics_dict)
+        controller_history.append({
+            "round": r,
+            "previous_configuration": round_metrics_dict.get("previous_configuration"),
+            "selected_configuration": {
+                "compression_ratio": round_metrics_dict.get("selected_compression_ratio"),
+                "local_epochs": round_metrics_dict.get("selected_local_epochs"),
+                "participation_fraction": round_metrics_dict.get("selected_participation_fraction"),
+            },
+            "decision": round_metrics_dict.get("controller_decision"),
+            "mode": round_metrics_dict.get("mode")
+        })
         
         round_telemetry.append({
             "round": r,
@@ -396,8 +516,8 @@ def run_federated_simulation(experiment_id, model_type="mlp", client_count=5,
             # We use the actual sizes if available; fall back to total/clients.
             avg_client_size = int(len(X_train) / client_count)
             reported_epsilon, accounted_steps = compute_dpsgd_epsilon(
-                rounds=rounds,
-                local_epochs=local_epochs,
+                rounds=1, # using accumulated epochs trick
+                local_epochs=accumulated_local_epochs if accumulated_local_epochs > 0 else (rounds * local_epochs),
                 batch_size=batch_size,
                 dataset_size=avg_client_size,
                 noise_multiplier=noise_mult,
@@ -431,11 +551,20 @@ def run_federated_simulation(experiment_id, model_type="mlp", client_count=5,
         "telemetry_by_round": round_telemetry,
     }
     final_val_metrics["privacy"] = privacy_telemetry
-    
+    final_val_metrics["mode"] = "adaptive" if adaptive_mode else "static"
+    final_val_metrics["adaptive_controller"] = {
+        "enabled": adaptive_mode,
+        "seed": seed,
+        "controller_config": controller.config,
+        "candidate_space": controller.candidates,
+        "objective_weights": controller.objective_weights,
+        "round_history": controller_history,
+    }
+
     # Save diagnostic plots against the validation set.
     # NOTE: y_test / X_test are loaded but intentionally NOT used for metric reporting.
     # They remain available only if a separate final_evaluation.py script is run explicitly.
     save_evaluation_plots(y_val_arr, val_probs, experiment_id)
-    
+
     return final_val_metrics, checkpoint_path
 

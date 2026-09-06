@@ -127,8 +127,12 @@ class FedLiteClient(fl.client.NumPyClient):
         # ── 3. DataLoader (seeded) ──────────────────────────────────── #
         loader_seed = config.get("seed", None)
         if loader_seed is not None:
+            try:
+                seed_value = int(loader_seed)
+            except (TypeError, ValueError):
+                seed_value = int(np.asarray(loader_seed).item())
             g = torch.Generator()
-            g.manual_seed(loader_seed + self.client_id)
+            g.manual_seed(seed_value + self.client_id)
             loader = DataLoader(self.train_dataset, batch_size=self.batch_size,
                                 shuffle=True, generator=g)
         else:

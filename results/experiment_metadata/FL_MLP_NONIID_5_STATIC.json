@@ -1,0 +1,279 @@
+{
+  "experiment_id": "FL_MLP_NONIID_5_STATIC",
+  "mode": "static",
+  "timestamp": "2026-09-06T20:18:06.129305",
+  "git_commit": "None",
+  "random_seed": 42,
+  "Python_version": "3.13.1 (tags/v3.13.1:0671451, Dec  3 2024, 19:06:28) [MSC v.1942 64 bit (AMD64)]",
+  "model_type": "mlp",
+  "client_count": 5,
+  "partition_method": "non_iid",
+  "dirichlet_alpha": 0.5,
+  "simulation_duration_sec": 23039.284254789352,
+  "adaptive_controller": {
+    "enabled": false,
+    "seed": 42,
+    "config": {
+      "candidates": {
+        "compression_ratios": [
+          1.0,
+          0.5,
+          0.25,
+          0.1,
+          0.01
+        ],
+        "local_epochs": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "participation_fractions": [
+          0.6,
+          0.8,
+          1.0
+        ]
+      },
+      "communication": {
+        "budget_bytes": null
+      },
+      "enabled": false,
+      "objective_weights": {
+        "communication": 0.5,
+        "privacy": 1.0,
+        "resource": 0.1,
+        "utility": 1.0
+      },
+      "privacy": {
+        "budget_epsilon": 5.0,
+        "enabled": true,
+        "stop_on_budget_exhaustion": true
+      },
+      "resource": {
+        "maximum_round_time_sec": null
+      },
+      "seed": 42,
+      "utility": {
+        "minimum_auroc": null
+      }
+    },
+    "candidate_space": {
+      "compression_ratios": [
+        1.0,
+        0.5,
+        0.25,
+        0.1,
+        0.01
+      ],
+      "local_epochs": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "participation_fractions": [
+        0.6,
+        0.8,
+        1.0
+      ]
+    },
+    "objective_weights": {
+      "communication": 0.5,
+      "privacy": 1.0,
+      "resource": 0.1,
+      "utility": 1.0
+    },
+    "round_history": [
+      {
+        "round": 1,
+        "previous_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "selected_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "decision": null,
+        "mode": "static"
+      },
+      {
+        "round": 2,
+        "previous_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "selected_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "decision": null,
+        "mode": "static"
+      },
+      {
+        "round": 3,
+        "previous_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "selected_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "decision": null,
+        "mode": "static"
+      },
+      {
+        "round": 4,
+        "previous_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "selected_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "decision": null,
+        "mode": "static"
+      },
+      {
+        "round": 5,
+        "previous_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "selected_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "decision": null,
+        "mode": "static"
+      },
+      {
+        "round": 6,
+        "previous_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "selected_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "decision": null,
+        "mode": "static"
+      },
+      {
+        "round": 7,
+        "previous_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "selected_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "decision": null,
+        "mode": "static"
+      },
+      {
+        "round": 8,
+        "previous_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "selected_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "decision": null,
+        "mode": "static"
+      },
+      {
+        "round": 9,
+        "previous_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "selected_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "decision": null,
+        "mode": "static"
+      },
+      {
+        "round": 10,
+        "previous_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "selected_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "decision": null,
+        "mode": "static"
+      }
+    ]
+  },
+  "privacy": {
+    "dp_enabled": true,
+    "mechanism": "dpsgd",
+    "privacy_unit": "record",
+    "clipping_norm": 1.0,
+    "noise_multiplier": 2.3,
+    "delta": "1e-05",
+    "epsilon": "4.9974",
+    "rounds_accounted": 10,
+    "participating_clients": 5
+  },
+  "compression_enabled": false,
+  "compression_ratio": 1.0,
+  "model_stats": {
+    "parameter_count": 4993,
+    "theoretical_fp32_size_kb": 19.50390625,
+    "theoretical_int8_size_kb": 4.8759765625,
+    "serialized_checkpoint_size_kb": 22.8681640625
+  },
+  "metrics": {
+    "auroc": 0.4835336748105058,
+    "auprc": 0.10593915940386678,
+    "f1": 0.0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "specificity": 1.0,
+    "accuracy": 0.891188887375732,
+    "brier_score": 0.1087188646197319,
+    "confusion_matrix": {
+      "tn": 13088,
+      "fp": 0,
+      "fn": 1598,
+      "tp": 0
+    }
+  },
+  "communication": {
+    "total_bytes_transmitted": 1997200,
+    "bytes_upstream": 998600,
+    "bytes_downstream": 998600
+  }
+}

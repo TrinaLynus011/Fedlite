@@ -17,12 +17,25 @@ def load_configs():
         fed_config = yaml.safe_load(f)
     return data_config, fed_config
 
+def load_adaptive_controller_config():
+    try:
+        with open("configs/adaptive_controller.yaml", "r") as f:
+            cfg = yaml.safe_load(f) or {}
+        return cfg.get("adaptive_controller", {})
+    except Exception:
+        return {}
+
+
 def save_experiment_metadata(experiment_id, model_type, client_count, partition_method,
-                             alpha, metrics, duration, seed, dp_config=None, comp_config=None):
+                             alpha, metrics, duration, seed, dp_config=None, comp_config=None,
+                             adaptive_enabled=False):
     if dp_config is None:
         dp_config = {"enabled": False}
     if comp_config is None:
         comp_config = {"enabled": False}
+
+    adaptive_cfg = load_adaptive_controller_config()
+    mode = "adaptive" if adaptive_enabled else "static"
 
     # Pull privacy telemetry that was computed by server.py's accountant
     privacy = metrics.get("privacy", {})
@@ -52,6 +65,7 @@ def save_experiment_metadata(experiment_id, model_type, client_count, partition_
 
     metadata = {
         "experiment_id": experiment_id,
+        "mode": mode,
         "timestamp": datetime.now().isoformat(),
         "git_commit": "None",
         "random_seed": seed,
@@ -61,6 +75,14 @@ def save_experiment_metadata(experiment_id, model_type, client_count, partition_
         "partition_method": partition_method,
         "dirichlet_alpha": alpha if partition_method == "non_iid" else None,
         "simulation_duration_sec": duration,
+        "adaptive_controller": {
+            "enabled": adaptive_enabled,
+            "seed": seed,
+            "config": adaptive_cfg,
+            "candidate_space": adaptive_cfg.get("candidates", {}),
+            "objective_weights": adaptive_cfg.get("objective_weights", {}),
+            "round_history": metrics.get("adaptive_controller", {}).get("round_history", [])
+        },
         "privacy": {
             "dp_enabled": dp_enabled,
             "mechanism": mechanism,
@@ -108,6 +130,7 @@ def save_experiment_metadata(experiment_id, model_type, client_count, partition_
     registry_path = "results/experiment_registry.csv"
     row = {
         "experiment_id": experiment_id,
+        "mode": mode,
         "model": model_type,
         "training_type": "federated",
         "client_count": client_count,
@@ -144,95 +167,162 @@ def save_experiment_metadata(experiment_id, model_type, client_count, partition_
     reg_df.to_csv(registry_path, index=False)
     print(f"Updated registry in {registry_path}")
 
-def run_all_federated_experiments():
+def run_experiment(exp_id, model, clients, partition, alpha, rounds, local_epochs, batch_size, lr, dp_config, comp_config, seed, adaptive_enabled):
+    print(f"\n==================================================")
+    print(f" RUNNING EXPERIMENT: {exp_id}")
+    print(f"==================================================")
+    
+    # Temporarily override adaptive controller config for this run
+    with open("configs/adaptive_controller.yaml", "r") as f:
+        adaptive_config = yaml.safe_load(f)
+    
+    adaptive_config["adaptive_controller"]["enabled"] = adaptive_enabled
+    adaptive_config["adaptive_controller"]["seed"] = seed
+    
+    with open("configs/adaptive_controller.yaml", "w") as f:
+        yaml.dump(adaptive_config, f)
+
+    try:
+        metrics, checkpoint_path = run_federated_simulation(
+            experiment_id=exp_id,
+            model_type=model,
+            client_count=clients,
+            partition_method=partition,
+            alpha=alpha,
+            rounds=rounds,
+            local_epochs=local_epochs,
+            batch_size=batch_size,
+            lr=lr,
+            dp_config=dp_config,
+            compression_config=comp_config,
+            seed=seed
+        )
+        
+        # Save metadata and update registry
+        save_experiment_metadata(
+            experiment_id=exp_id,
+            model_type=model,
+            client_count=clients,
+            partition_method=partition,
+            alpha=alpha,
+            metrics=metrics,
+            duration=metrics["simulation_time_sec"],
+            seed=seed,
+            dp_config=dp_config,
+            comp_config=comp_config,
+            adaptive_enabled=adaptive_enabled
+        )
+        
+        return {
+            "Experiment": exp_id,
+            "Model": model,
+            "Clients": clients,
+            "Partition": partition,
+            "Alpha": alpha if partition == "non_iid" else "N/A",
+            "AUROC": f"{metrics['auroc']:.4f}",
+            "AUPRC": f"{metrics['auprc']:.4f}",
+            "Privacy epsilon": metrics["privacy"]["epsilon"] if metrics["privacy"].get("dp_enabled") else "N/A",
+            "Total communication bytes": metrics["communication"]["total_bytes"],
+            "Training time": f"{metrics['simulation_time_sec']:.2f}",
+        }
+        
+    except Exception as e:
+        print(f"Error running experiment {exp_id}: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return None
+
+def load_experiment_metadata(exp_id):
+    path = os.path.join("results", "experiment_metadata", f"{exp_id}.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, "r") as f:
+        return json.load(f)
+
+
+def run_comparison():
+    static_id = "FL_MLP_NONIID_5_STATIC"
+    adaptive_id = "FL_MLP_NONIID_5_ADAPTIVE"
+
+    static_meta = load_experiment_metadata(static_id)
+    adaptive_meta = load_experiment_metadata(adaptive_id)
+
+    print("\n==================================================")
+    print(" COMPARISON OUTPUT")
+    print("==================================================")
+    print(f"| Metric                         | Static | Adaptive |")
+    print(f"| ------------------------------ | -----: | -------: |")
+
+    def format_metric(static_value, adaptive_value):
+        if static_value is None:
+            static_display = "NOT YET RUN"
+        else:
+            static_display = static_value
+        if adaptive_value is None:
+            adaptive_display = "NOT YET RUN"
+        else:
+            adaptive_display = adaptive_value
+        return static_display, adaptive_display
+
+    static_metrics = static_meta.get("metrics", {}) if static_meta else {}
+    adaptive_metrics = adaptive_meta.get("metrics", {}) if adaptive_meta else {}
+    static_priv = static_meta.get("privacy", {}) if static_meta else {}
+    adaptive_priv = adaptive_meta.get("privacy", {}) if adaptive_meta else {}
+    static_comm = static_meta.get("communication", {}) if static_meta else {}
+    adaptive_comm = adaptive_meta.get("communication", {}) if adaptive_meta else {}
+
+    static_auroc = f"{static_metrics.get('auroc', 'NOT YET RUN'):.4f}" if static_metrics.get('auroc') is not None else "NOT YET RUN"
+    adaptive_auroc = f"{adaptive_metrics.get('auroc', 'NOT YET RUN'):.4f}" if adaptive_metrics.get('auroc') is not None else "NOT YET RUN"
+    static_auprc = f"{static_metrics.get('auprc', 'NOT YET RUN'):.4f}" if static_metrics.get('auprc') is not None else "NOT YET RUN"
+    adaptive_auprc = f"{adaptive_metrics.get('auprc', 'NOT YET RUN'):.4f}" if adaptive_metrics.get('auprc') is not None else "NOT YET RUN"
+    static_eps = static_priv.get("epsilon", "NOT YET RUN")
+    adaptive_eps = adaptive_priv.get("epsilon", "NOT YET RUN")
+    static_bytes = static_comm.get("total_bytes_transmitted", "NOT YET RUN")
+    adaptive_bytes = adaptive_comm.get("total_bytes_transmitted", "NOT YET RUN")
+    static_time = static_meta.get("simulation_duration_sec", "NOT YET RUN") if static_meta else "NOT YET RUN"
+    adaptive_time = adaptive_meta.get("simulation_duration_sec", "NOT YET RUN") if adaptive_meta else "NOT YET RUN"
+
+    print(f"| AUROC                          | {static_auroc} | {adaptive_auroc} |")
+    print(f"| AUPRC                          | {static_auprc} | {adaptive_auprc} |")
+    print(f"| Privacy epsilon                | {static_eps} | {adaptive_eps} |")
+    print(f"| Total communication bytes      | {static_bytes} | {adaptive_bytes} |")
+    print(f"| Training time                  | {static_time} | {adaptive_time} |")
+    print("| Mean local epochs              | NOT YET RUN | NOT YET RUN |")
+    print("| Mean participation fraction    | NOT YET RUN | NOT YET RUN |")
+    print("| Mean compression configuration | NOT YET RUN | NOT YET RUN |")
+
+
+def run_static_experiment():
     data_config, fed_config = load_configs()
     rounds = fed_config.get("rounds", 10)
     local_epochs = fed_config.get("local_epochs", 3)
     batch_size = fed_config.get("local_batch_size", 128)
     lr = fed_config.get("local_learning_rate", 0.005)
     seed = data_config["split"]["seed"]
-    
-    # Define experiment matrix
-    experiments = [
-        # LR Experiments
-        ("FL_LR_IID_5", "lr", 5, "iid", 0.5),
-        ("FL_LR_IID_10", "lr", 10, "iid", 0.5),
-        ("FL_LR_NONIID_5", "lr", 5, "non_iid", 0.5),
-        ("FL_LR_NONIID_10", "lr", 10, "non_iid", 0.5),
-        
-        # MLP Experiments
-        ("FL_MLP_IID_5", "mlp", 5, "iid", 0.5),
-        ("FL_MLP_IID_10", "mlp", 10, "iid", 0.5),
-        ("FL_MLP_NONIID_5", "mlp", 5, "non_iid", 0.5),
-        ("FL_MLP_NONIID_10", "mlp", 10, "non_iid", 0.5),
-    ]
-    
-    fl_results = []
-    
-    for exp_id, model, clients, partition, alpha in experiments:
-        print(f"\n==================================================")
-        print(f" RUNNING EXPERIMENT: {exp_id}")
-        print(f"==================================================")
-        
-        # Configure privacy and compression as Disabled for standard runs
-        dp_config = {"enabled": False, "mechanism": "client_update_gaussian"}
-        comp_config = {"enabled": False}
-        
-        try:
-            metrics, checkpoint_path = run_federated_simulation(
-                experiment_id=exp_id,
-                model_type=model,
-                client_count=clients,
-                partition_method=partition,
-                alpha=alpha,
-                rounds=rounds,
-                local_epochs=local_epochs,
-                batch_size=batch_size,
-                lr=lr,
-                dp_config=dp_config,
-                compression_config=comp_config,
-                seed=seed
-            )
-            
-            # Save metadata and update registry
-            save_experiment_metadata(
-                experiment_id=exp_id,
-                model_type=model,
-                client_count=clients,
-                partition_method=partition,
-                alpha=alpha,
-                metrics=metrics,
-                duration=metrics["simulation_time_sec"],
-                seed=seed,
-                dp_config=dp_config,
-                comp_config=comp_config
-            )
-            
-            fl_results.append({
-                "Experiment": exp_id,
-                "Model": model,
-                "Clients": clients,
-                "Partition": partition,
-                "Alpha": alpha if partition == "non_iid" else "N/A",
-                "AUROC": f"{metrics['auroc']:.4f}",
-                "AUPRC": f"{metrics['auprc']:.4f}",
-                "F1-Score": f"{metrics['f1']:.4f}",
-                "Recall": f"{metrics['recall']:.4f}",
-                "Precision": f"{metrics['precision']:.4f}",
-                "Communication (MB)": f"{metrics['communication']['total_bytes'] / (1024*1024):.2f}"
-            })
-            
-        except Exception as e:
-            print(f"Error running experiment {exp_id}: {str(e)}")
-            import traceback
-            traceback.print_exc()
-            
-    # Save a comparison summary CSV
-    if len(fl_results) > 0:
-        summary_df = pd.DataFrame(fl_results)
-        summary_df.to_csv("results/federated_comparison.csv", index=False)
-        print("\n=== Federated Experiments Comparison ===")
-        print(summary_df.to_string(index=False))
+    dp_config = {"enabled": True, "mechanism": "dpsgd", "noise_multiplier": 2.3, "clipping_norm": 1.0, "delta": 1e-5}
+    comp_config = {"enabled": True, "ratio": 1.0}
+    return run_experiment("FL_MLP_NONIID_5_STATIC", "mlp", 5, "non_iid", 0.5, rounds, local_epochs, batch_size, lr, dp_config, comp_config, seed, False)
+
+
+def run_adaptive_experiment():
+    data_config, fed_config = load_configs()
+    rounds = fed_config.get("rounds", 10)
+    local_epochs = fed_config.get("local_epochs", 3)
+    batch_size = fed_config.get("local_batch_size", 128)
+    lr = fed_config.get("local_learning_rate", 0.005)
+    seed = data_config["split"]["seed"]
+    dp_config = {"enabled": True, "mechanism": "dpsgd", "noise_multiplier": 2.3, "clipping_norm": 1.0, "delta": 1e-5}
+    comp_config = {"enabled": True, "ratio": 1.0}
+    return run_experiment("FL_MLP_NONIID_5_ADAPTIVE", "mlp", 5, "non_iid", 0.5, rounds, local_epochs, batch_size, lr, dp_config, comp_config, seed, True)
+
 
 if __name__ == "__main__":
-    run_all_federated_experiments()
+    args = sys.argv[1:]
+    if not args or args[0].lower() in {"compare", "comparison"}:
+        run_comparison()
+    elif args[0].lower() in {"static", "baseline"}:
+        run_static_experiment()
+    elif args[0].lower() in {"adaptive"}:
+        run_adaptive_experiment()
+    else:
+        print("Usage: python src/federated/train_federated.py [static|adaptive|compare]")

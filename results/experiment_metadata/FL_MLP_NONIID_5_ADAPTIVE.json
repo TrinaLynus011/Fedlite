@@ -1,0 +1,5759 @@
+{
+  "experiment_id": "FL_MLP_NONIID_5_ADAPTIVE",
+  "mode": "adaptive",
+  "timestamp": "2026-09-06T13:50:22.979295",
+  "git_commit": "None",
+  "random_seed": 42,
+  "Python_version": "3.13.1 (tags/v3.13.1:0671451, Dec  3 2024, 19:06:28) [MSC v.1942 64 bit (AMD64)]",
+  "model_type": "mlp",
+  "client_count": 5,
+  "partition_method": "non_iid",
+  "dirichlet_alpha": 0.5,
+  "simulation_duration_sec": 63372.44648694992,
+  "adaptive_controller": {
+    "enabled": true,
+    "seed": 42,
+    "config": {
+      "candidates": {
+        "compression_ratios": [
+          1.0,
+          0.5,
+          0.25,
+          0.1,
+          0.01
+        ],
+        "local_epochs": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "participation_fractions": [
+          0.6,
+          0.8,
+          1.0
+        ]
+      },
+      "communication": {
+        "budget_bytes": null
+      },
+      "enabled": true,
+      "objective_weights": {
+        "communication": 0.5,
+        "privacy": 1.0,
+        "resource": 0.1,
+        "utility": 1.0
+      },
+      "privacy": {
+        "budget_epsilon": 5.0,
+        "enabled": true,
+        "stop_on_budget_exhaustion": true
+      },
+      "resource": {
+        "maximum_round_time_sec": null
+      },
+      "seed": 42,
+      "utility": {
+        "minimum_auroc": null
+      }
+    },
+    "candidate_space": {
+      "compression_ratios": [
+        1.0,
+        0.5,
+        0.25,
+        0.1,
+        0.01
+      ],
+      "local_epochs": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "participation_fractions": [
+        0.6,
+        0.8,
+        1.0
+      ]
+    },
+    "objective_weights": {
+      "communication": 0.5,
+      "privacy": 1.0,
+      "resource": 0.1,
+      "utility": 1.0
+    },
+    "round_history": [
+      {
+        "round": 1,
+        "previous_configuration": {
+          "compression_ratio": 1.0,
+          "local_epochs": 3,
+          "participation_fraction": 1.0
+        },
+        "selected_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "decision": {
+          "action": "continue",
+          "reason": "highest_valid_score",
+          "selected_score": -0.14646577258327262,
+          "constraint_status": "valid",
+          "controller_decision_reason": "highest_valid_score",
+          "candidate_scores": [
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.388511720146088,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5180156268614508,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6475195335768134,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.477023440292176,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6360312537229015,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7950390671536268,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5655351604382641,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.7540468805843521,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.9425586007304401,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7425586007304401,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9900781343072536,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.237597667884067,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.25639579715183275,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.3418610628691104,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.42732632858638797,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3627915943036655,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.4837221257382207,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6046526571727759,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.46918739145549826,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.625583188607331,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7819789857591637,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.6819789857591637,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9093053143455518,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.1366316429319396,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.19404174927785722,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.25872233237047637,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.32340291546309546,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3130834985557145,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.41744466474095276,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5218058309261909,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4321252478335718,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5761669971114289,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7202087463892863,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.6702087463892863,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.8936116618523818,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.1170145773154772,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.16026289259208976,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.21368385678945306,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.26710482098681626,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.2905257851841795,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.3873677135789061,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.4842096419736326,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.42078867777626927,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.561051570368359,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7013144629604487,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.6813144629604487,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9084192839472651,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.1355241049340814,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.14646577258327262,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.1952876967776969,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.24410962097212108,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.2899315451665453,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.3865753935553938,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.4832192419442422,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.43339731774981793,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5778630903330905,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7223288629163632,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7203288629163632,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9604384838884844,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2005481048606055,
+              "constraint_status": "valid"
+            }
+          ]
+        },
+        "mode": "adaptive"
+      },
+      {
+        "round": 2,
+        "previous_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "selected_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "decision": {
+          "action": "continue",
+          "reason": "highest_valid_score",
+          "selected_score": -0.15023787103373284,
+          "constraint_status": "valid",
+          "controller_decision_reason": "highest_valid_score",
+          "candidate_scores": [
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.392174360448986,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5228991472653147,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6536239340816434,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.484348720897972,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6457982945306294,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8072478681632868,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5765230813469581,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.768697441795944,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.9608718022449301,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.76087180224493,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0144957363265734,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2681196704082167,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.260094059176025,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.34679207890136676,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.4334900986267084,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.37018811835205,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.49358415780273346,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6169801972534168,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.48028217752807506,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6403762367041,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8004702958801251,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.700470295880125,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9339603945068335,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.1674504931335419,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.19776519966273426,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.2636869328836457,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.3296086661045571,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3205303993254685,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.42737386576729136,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5342173322091142,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.44329559898820275,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.591060798650937,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7388259983136711,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.6888259983136712,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9184346644182284,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.1480433305227853,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.16400869338619473,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.21867825784825964,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.2733478223103245,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.2980173867723894,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.39735651569651925,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.4966956446206491,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4320260801585841,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5760347735447788,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7200434669309734,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7000434669309735,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9333912892412981,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.1667391115516226,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.15023787103373284,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.20031716137831046,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.2503964517228881,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.2974757420674657,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.39663432275662097,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.49579290344577615,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4447136131011985,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5929514841349314,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7411893551686641,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7391893551686641,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9855858068915523,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2319822586144402,
+              "constraint_status": "valid"
+            }
+          ]
+        },
+        "mode": "adaptive"
+      },
+      {
+        "round": 3,
+        "previous_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "selected_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "decision": {
+          "action": "continue",
+          "reason": "highest_valid_score",
+          "selected_score": -0.1533686666583167,
+          "constraint_status": "valid",
+          "controller_decision_reason": "highest_valid_score",
+          "candidate_scores": [
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3947891970011046,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5263855960014729,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6579819950018411,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.48957839400220915,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6527711920029458,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.815963990003682,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5843675910033138,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.7791567880044183,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.973945985005523,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.773945985005523,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.031927980007364,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2899099750092051,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.2628768078542662,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.35050241047235503,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.43812801309044375,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3757536157085324,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.50100482094471,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6262560261808874,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4886304235627987,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6515072314170649,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8143840392713312,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7143840392713312,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9525120523617749,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.1906400654522187,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.2006666801440002,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.26755557352533366,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.334444466906667,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3263333602880004,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.43511114705066734,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.543888933813334,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.45200004043200065,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6026667205760008,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7533334007200011,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7033334007200011,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9377778676266681,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.1722223345333351,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.1670155282578949,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.2226873710105266,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.2783592137631582,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3040310565157898,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.4053747420210532,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5067184275263165,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.44104658477368475,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5880621130315796,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7350776412894746,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7150776412894746,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9534368550526329,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.1917960688157911,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.1533686666583167,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.2044915555444223,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.25561444443052783,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3037373333166334,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.4049831110888446,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5062288888610557,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4541059999749501,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6054746666332668,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7568433332915836,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7548433332915836,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0064577777221113,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2580722221526393,
+              "constraint_status": "valid"
+            }
+          ]
+        },
+        "mode": "adaptive"
+      },
+      {
+        "round": 4,
+        "previous_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "selected_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "decision": {
+          "action": "continue",
+          "reason": "highest_valid_score",
+          "selected_score": -0.15620404024467197,
+          "constraint_status": "valid",
+          "controller_decision_reason": "highest_valid_score",
+          "candidate_scores": [
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.39842800898539615,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5312373453138616,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6640466816423269,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.49685601797079226,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6624746906277231,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8280933632846539,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5952840269561884,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.7937120359415847,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.9921400449269808,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7921400449269809,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0561867265693077,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.3202334082116347,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.26625415132912456,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.3550055351054995,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.4437569188818743,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.38250830265824914,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5100110702109989,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6375138377637486,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4987624539873737,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6650166053164983,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8312707566456229,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7312707566456229,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9750276755274973,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2187845944093714,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.2038591374627716,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.2718121832836955,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.33976522910461937,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3327182749255432,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.44362436656739096,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5545304582092387,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.46157741238831473,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6154365498510864,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.769295687313858,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7192956873138581,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9590609164184773,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.1988261455230966,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.1700439303886034,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.22672524051813792,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.2834065506476724,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.31008786077720685,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.4134504810362758,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5168131012953447,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4501317911658102,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6001757215544137,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7502196519430171,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7302196519430171,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9736262025906894,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2170327532383618,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.15620404024467197,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.20827205365956264,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.2603400670744533,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.30940808048934393,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.4125441073191253,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5156801341489066,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4626121207340158,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6168161609786879,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7710202012233598,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7690202012233598,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0253602682978131,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2817003353722662,
+              "constraint_status": "valid"
+            }
+          ]
+        },
+        "mode": "adaptive"
+      },
+      {
+        "round": 5,
+        "previous_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "selected_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "decision": {
+          "action": "continue",
+          "reason": "highest_valid_score",
+          "selected_score": -0.15865418804714893,
+          "constraint_status": "valid",
+          "controller_decision_reason": "highest_valid_score",
+          "candidate_scores": [
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.40075213300661844,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.534336177342158,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6679202216776975,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5015042660132368,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.668672354684316,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8358404433553948,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.6022563990198553,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.8030085320264738,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -1.0037606650330924,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.8037606650330922,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0716808867107896,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.3396011083884871,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.2686192881402788,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.35815905085370514,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.44769881356713137,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3872385762805576,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5163181017074102,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6453976271342626,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5058578644208362,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6744771525611152,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8430964407013939,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7430964407013939,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9907952542685252,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2384940678356566,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.20625327469580204,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.27500436626106944,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.34375545782633676,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.33750654939160407,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.4500087325221389,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5625109156526735,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4687598240874061,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6250130987832082,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7812663734790103,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7312663734790102,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.975021831305347,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2187772891316837,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.17246380059031852,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.22995173412042474,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.28743966765053086,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.314927601180637,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.41990346824084945,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5248793353010617,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.45739140177095544,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.609855202361274,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7623190029515925,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7423190029515926,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9897586706021234,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2371983382526541,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.15865418804714893,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.21153891739619862,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.2644236467452482,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.31430837609429785,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.41907783479239724,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5238472934904965,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.46996256414144677,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6266167521885957,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7832709402357447,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7812709402357447,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.041694586980993,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.3021182337262411,
+              "constraint_status": "valid"
+            }
+          ]
+        },
+        "mode": "adaptive"
+      },
+      {
+        "round": 6,
+        "previous_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "selected_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "decision": {
+          "action": "continue",
+          "reason": "highest_valid_score",
+          "selected_score": -0.16083122664069952,
+          "constraint_status": "valid",
+          "controller_decision_reason": "highest_valid_score",
+          "candidate_scores": [
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.40245163932418837,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5366021857655845,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6707527322069806,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5049032786483767,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6732043715311691,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8415054644139611,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.607354917972565,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.8098065572967534,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -1.0122581966209419,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.8122581966209417,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0830109288279224,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.3537636610349029,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.2704742010860701,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.36063226811476023,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.45079033514345024,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3909484021721402,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5212645362295204,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6515806702869005,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5114226032582103,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6818968043442805,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8523710054303506,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7523710054303506,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.003161340573801,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.253951675717251,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.2082180767222501,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.2776241022963335,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.34703012787041687,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3414361534445002,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.455248204592667,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5690602557408337,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4746542301667503,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6328723068890004,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7910903836112505,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7410903836112506,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -0.9881205114816674,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2351506393520841,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.17452611058693993,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.23270148078258662,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.29087685097823324,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3190522211738799,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.4254029615651732,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5317537019564664,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.46357833176081975,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6181044423477597,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7726305529346996,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7526305529346997,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0035074039129328,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2543842548911661,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.16083122664069952,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.21444163552093273,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.26805204440116587,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.318662453281399,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.42488327104186546,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5311040888023317,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4764936799220985,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.635324906562798,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7941561332034975,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7921561332034975,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0562081776046635,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.3202602220058293,
+              "constraint_status": "valid"
+            }
+          ]
+        },
+        "mode": "adaptive"
+      },
+      {
+        "round": 7,
+        "previous_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "selected_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "decision": {
+          "action": "continue",
+          "reason": "highest_valid_score",
+          "selected_score": -0.1628519588313486,
+          "constraint_status": "valid",
+          "controller_decision_reason": "highest_valid_score",
+          "candidate_scores": [
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.404310371184351,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5390804949124681,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.673850618640585,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5086207423687019,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6781609898249361,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.84770123728117,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.612931113553053,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.8172414847374039,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -1.021551855921755,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.821551855921755,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0954024745623399,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.369253093202925,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.27238565383317165,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.3631808717775623,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.4539760897219528,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.39477130766634333,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5263617435551246,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6579521794439056,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.517156961499515,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6895426153326867,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8619282691658584,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7619282691658584,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0159043588878112,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.269880448609764,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.21016680876601632,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.2802224116880218,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.3502780146100272,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3453336175320326,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.46044482337604364,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5755560292200544,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.48050042629804895,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6406672350640653,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8008340438300816,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7508340438300817,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0011120584401088,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2513900730501362,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.1765079217003056,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.23534389560040753,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.29417986950050934,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3230158434006112,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.4306877912008151,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5383597390010186,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4695237651009168,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6260316868012225,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.782539608501528,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.762539608501528,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0167194780020374,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2708993475025467,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.1628519588313486,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.21713594510846485,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.271419931385581,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3227039176626972,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.4302718902169297,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.537839862771162,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4825558764940458,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6434078353253944,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8042597941567431,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.8022597941567431,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.069679725542324,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.337099656927905,
+              "constraint_status": "valid"
+            }
+          ]
+        },
+        "mode": "adaptive"
+      },
+      {
+        "round": 8,
+        "previous_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "selected_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "decision": {
+          "action": "continue",
+          "reason": "highest_valid_score",
+          "selected_score": -0.16477217567324076,
+          "constraint_status": "valid",
+          "controller_decision_reason": "highest_valid_score",
+          "candidate_scores": [
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4065429003107002,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.542057200414267,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6775715005178337,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5130858006214003,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6841144008285338,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8551430010356673,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.6196287009321005,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.8261716012428006,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -1.0327145015535009,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.8327145015535008,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.1102860020713345,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.3878575025891682,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.27451654501477685,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.3660220600197025,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.45752757502462815,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3990330900295537,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.532044120039405,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6650551500492563,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5235496350443306,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6980661800591075,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8725827250738842,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7725827250738843,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0301103000985126,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2876378751231405,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.21222583106766718,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.2829677747568896,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.353709718446112,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.34945166213533435,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.4659355495137792,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.582419436892224,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4866774932030015,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6489033242706687,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8111291553383357,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7611291553383358,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0148388737844478,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2685485922305597,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.17850317252838419,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.2380042300378456,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.297505287547307,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.32700634505676834,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.43600846007569116,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5450105750946139,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4755095175851525,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6340126901135367,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7925158626419208,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7725158626419207,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0300211501892278,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2875264377365347,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.16477217567324076,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.21969623423098772,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.2746202927887346,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3265443513464815,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.43539246846197543,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5442405855774692,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4883165270197223,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.651088702692963,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8138608783662038,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.8118608783662038,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0824811711549385,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.3531014639436731,
+              "constraint_status": "valid"
+            }
+          ]
+        },
+        "mode": "adaptive"
+      },
+      {
+        "round": 9,
+        "previous_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "selected_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "decision": {
+          "action": "continue",
+          "reason": "highest_valid_score",
+          "selected_score": -0.16627919353248563,
+          "constraint_status": "valid",
+          "controller_decision_reason": "highest_valid_score",
+          "candidate_scores": [
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.40571450721539,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5409526762871867,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6761908453589833,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5114290144307799,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6819053525743735,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8523816907179667,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.6171435216461699,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.8228580288615599,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -1.02857253607695,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.82857253607695,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.1047633814359332,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.3809542267949166,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.2744481808436131,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.3659309077914843,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.45741363473935526,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3988963616872263,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5318618155829685,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6648272694787105,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5233445425308394,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6977927233744526,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8722409042180658,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7722409042180658,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.029654538957421,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2870681736967764,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.21269488850266532,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.28359318467022054,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.3544914808377756,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3503897770053307,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.467186369340441,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5839829616755512,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.488084665507996,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6507795540106613,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8134744425133268,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7634744425133267,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0179659233511025,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2724574041888779,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.17944910072825715,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.23926546763767625,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.29908183454709525,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3288982014565143,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.43853093527535253,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5481636690941906,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.47834730218477145,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6377964029130286,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.7972455036412858,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7772455036412858,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.036327338188381,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2954091727354764,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.16627919353248563,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.22170559137664755,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.2771319892208094,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.32955838706497126,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.4394111827532951,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5492639784416188,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.49283758059745686,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6571167741299425,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8213959676624282,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.8193959676624282,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0925279568832376,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.365659946104047,
+              "constraint_status": "valid"
+            }
+          ]
+        },
+        "mode": "adaptive"
+      },
+      {
+        "round": 10,
+        "previous_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "selected_configuration": {
+          "compression_ratio": 0.01,
+          "local_epochs": 1,
+          "participation_fraction": 0.6
+        },
+        "decision": {
+          "action": "continue",
+          "reason": "highest_valid_score",
+          "selected_score": -0.16792596844084487,
+          "constraint_status": "valid",
+          "controller_decision_reason": "highest_valid_score",
+          "candidate_scores": [
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4070775207709274,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.54277002769457,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6784625346182124,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5141550415418548,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6855400553891398,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8569250692364248,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.6212325623127821,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.8283100830837096,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -1.035387603854637,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.835387603854637,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.1138501384728494,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 1.0,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.3923126730910618,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.27590354081693147,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.3678713877559087,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.45983923469488586,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.401807081633863,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.5357427755118174,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.6696784693897717,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.5277106224507945,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.703614163267726,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8795177040846575,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7795177040846575,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0393569387795436,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.5,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2991961734744293,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.21421554725421488,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.2856207296722866,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.35702591209035817,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.35343109450842974,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.4712414593445731,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5890518241807163,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4926466417626446,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6568621890168596,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8210777362710744,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7710777362710743,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0281036483614328,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.25,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.2851295604517907,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.18102770109950242,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.24137026813266993,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.3017128351658374,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.3320554021990048,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.4427405362653399,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5534256703316748,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.48308310329850723,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6441108043980096,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8051385054975121,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.7851385054975121,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.0468513406633497,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.1,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.3085641758291868,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.6
+              },
+              "score": -0.16792596844084487,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 0.8
+              },
+              "score": -0.22390129125445987,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 1,
+                "participation_fraction": 1.0
+              },
+              "score": -0.27987661406807485,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.6
+              },
+              "score": -0.33285193688168974,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 0.8
+              },
+              "score": -0.44380258250891974,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 2,
+                "participation_fraction": 1.0
+              },
+              "score": -0.5547532281361497,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.6
+              },
+              "score": -0.4977779053225346,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 0.8
+              },
+              "score": -0.6637038737633795,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 3,
+                "participation_fraction": 1.0
+              },
+              "score": -0.8296298422042243,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.6
+              },
+              "score": -0.8276298422042243,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 0.8
+              },
+              "score": -1.1035064562722994,
+              "constraint_status": "valid"
+            },
+            {
+              "candidate": {
+                "compression_ratio": 0.01,
+                "local_epochs": 5,
+                "participation_fraction": 1.0
+              },
+              "score": -1.379383070340374,
+              "constraint_status": "valid"
+            }
+          ]
+        },
+        "mode": "adaptive"
+      }
+    ]
+  },
+  "privacy": {
+    "dp_enabled": true,
+    "mechanism": "dpsgd",
+    "privacy_unit": "record",
+    "clipping_norm": 1.0,
+    "noise_multiplier": 2.3,
+    "delta": "1e-05",
+    "epsilon": "4.1397",
+    "rounds_accounted": 10,
+    "participating_clients": 5
+  },
+  "compression_enabled": true,
+  "compression_ratio": 0.01,
+  "model_stats": {
+    "parameter_count": 4993,
+    "theoretical_fp32_size_kb": 19.50390625,
+    "theoretical_int8_size_kb": 4.8759765625,
+    "serialized_checkpoint_size_kb": 22.8916015625
+  },
+  "metrics": {
+    "auroc": 0.5356337747214581,
+    "auprc": 0.12455667852289623,
+    "f1": 0.18828532766286488,
+    "precision": 0.1362237762237762,
+    "recall": 0.304755944931164,
+    "specificity": 0.7640586797066015,
+    "accuracy": 0.714081438104317,
+    "brier_score": 0.09944739937782288,
+    "confusion_matrix": {
+      "tn": 10000,
+      "fp": 3088,
+      "fn": 1111,
+      "tp": 487
+    }
+  },
+  "communication": {
+    "total_bytes_transmitted": 761131,
+    "bytes_upstream": 122027,
+    "bytes_downstream": 639104
+  }
+}

@@ -1,0 +1,34 @@
+adaptive_controller:
+  candidates:
+    compression_ratios:
+    - 1.0
+    - 0.5
+    - 0.25
+    - 0.1
+    - 0.01
+    local_epochs:
+    - 1
+    - 2
+    - 3
+    - 5
+    participation_fractions:
+    - 0.6
+    - 0.8
+    - 1.0
+  communication:
+    budget_bytes: null
+  enabled: false
+  objective_weights:
+    communication: 0.5
+    privacy: 1.0
+    resource: 0.1
+    utility: 1.0
+  privacy:
+    budget_epsilon: 5.0
+    enabled: true
+    stop_on_budget_exhaustion: true
+  resource:
+    maximum_round_time_sec: null
+  seed: 42
+  utility:
+    minimum_auroc: null
