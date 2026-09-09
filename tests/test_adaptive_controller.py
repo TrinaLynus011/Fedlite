@@ -167,3 +167,19 @@ def test_round_to_round_config_applies_next_round():
     assert 0.0 < next_cfg["participation_fraction"] <= 1.0
     assert next_cfg["local_epochs"] >= 1
     assert 0.0 < next_cfg["compression_ratio"] <= 1.0
+
+
+def test_controller_ignores_edge_constraint_when_no_edge_telemetry_is_active():
+    controller = AdaptiveFederatedController(config_path="configs/adaptive_controller.yaml")
+    controller.enabled = True
+    controller.observe({
+        "epsilon": 1.0,
+        "total_bytes_transmitted": 1000,
+        "val_auroc": 0.72,
+        "training_time_sec": 10.0,
+        "edge_telemetry_active": False,
+        "edge_eligible_clients": 0,
+    })
+    next_cfg, meta = controller.select_next_configuration()
+    assert next_cfg is not None
+    assert meta["action"] == "continue"

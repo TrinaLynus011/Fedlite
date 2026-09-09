@@ -1,0 +1,38 @@
+[
+  {
+    "node_id": "Hospital-Edge-01",
+    "state": "AVAILABLE",
+    "cpu_load": 25,
+    "memory_pressure": 30,
+    "network_quality": 92,
+    "participation_status": "READY",
+    "timestamp": "2026-09-07T12:00:00Z"
+  },
+  {
+    "node_id": "Hospital-Edge-02",
+    "state": "BUSY",
+    "cpu_load": 57,
+    "memory_pressure": 58,
+    "network_quality": 72,
+    "participation_status": "LIMITED",
+    "timestamp": "2026-09-07T12:01:00Z"
+  },
+  {
+    "node_id": "Hospital-Edge-03",
+    "state": "CONSTRAINED",
+    "cpu_load": 80,
+    "memory_pressure": 74,
+    "network_quality": 39,
+    "participation_status": "RESTRICTED",
+    "timestamp": "2026-09-07T12:02:00Z"
+  },
+  {
+    "node_id": "Hospital-Edge-04",
+    "state": "OFFLINE",
+    "cpu_load": 0,
+    "memory_pressure": 0,
+    "network_quality": 0,
+    "participation_status": "UNAVAILABLE",
+    "timestamp": "2026-09-07T12:03:00Z"
+  }
+]

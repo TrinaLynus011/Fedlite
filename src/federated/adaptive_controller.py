@@ -160,6 +160,13 @@ class AdaptiveFederatedController:
         if max_round_time is not None and training_time is not None and training_time > float(max_round_time):
             return False, "resource_limit_exceeded"
 
+        edge_telemetry_active = bool(state.get("edge_telemetry_active", False))
+        eligible_edges = state.get("edge_eligible_clients")
+        if edge_telemetry_active and eligible_edges is not None:
+            eligible_edges = int(eligible_edges)
+            if eligible_edges <= 0:
+                return False, "no_eligible_edge_clients"
+
         return True, "valid"
 
     def _score_candidate(self, candidate, state):
@@ -182,6 +189,12 @@ class AdaptiveFederatedController:
         communication_cost = comp_ratio * participation
         resource_cost = (local_epochs / max_epochs) * participation
 
+        edge_resource_pressure = self._get_utility_value(state, ["edge_resource_pressure", "resource_pressure"])
+        if edge_resource_pressure is not None:
+            edge_resource_pressure = max(0.0, min(1.0, float(edge_resource_pressure)))
+        else:
+            edge_resource_pressure = 0.0
+
         epsilon = self._get_utility_value(state, ["epsilon", "privacy_epsilon", "epsilon_value"])
         privacy_budget = self.privacy_config.get("budget_epsilon")
         privacy_pressure = 0.0
@@ -193,7 +206,7 @@ class AdaptiveFederatedController:
         score = (
             w_util * utility_score
             - w_comm * communication_cost
-            - w_res * resource_cost
+            - w_res * (resource_cost + 0.5 * edge_resource_pressure)
             - w_priv * privacy_cost
         )
         return float(score)

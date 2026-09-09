@@ -39,6 +39,7 @@ from data.partition import partition_data
 from federated.client import FedLiteClient
 from privacy.dp_mechanism import compute_client_update_epsilon, compute_dpsgd_epsilon
 from federated.adaptive_controller import AdaptiveFederatedController
+from edge.iot_telemetry import EdgeTelemetryRegistry, build_edge_client_mapping, interpret_edge_resource
 
 def get_evaluate_fn(model_type, input_dim, hidden_dims, X_val, y_val):
     """
@@ -114,7 +115,8 @@ def fit_config(server_round):
 def run_federated_simulation(experiment_id, model_type="mlp", client_count=5,
                              partition_method="iid", alpha=0.5, rounds=10,
                              local_epochs=3, batch_size=128, lr=0.005,
-                             dp_config=None, compression_config=None, seed=42):
+                             dp_config=None, compression_config=None, seed=42,
+                             edge_registry=None, edge_client_mapping=None):
     
     # 0. Set deterministic seeds globally for PyTorch, NumPy, Python random
     import random
@@ -178,6 +180,16 @@ def run_federated_simulation(experiment_id, model_type="mlp", client_count=5,
             compression_config=compression_config
         )
         clients.append(client)
+
+    if edge_registry is None:
+        edge_registry = EdgeTelemetryRegistry(
+            node_ids=[f"Hospital-Edge-{idx + 1:02d}" for idx in range(max(1, client_count))]
+        )
+    if edge_client_mapping is None:
+        edge_client_mapping = build_edge_client_mapping(
+            client_count=client_count,
+            node_ids=[f"Hospital-Edge-{idx + 1:02d}" for idx in range(max(1, client_count))]
+        )
         
     # Load dropout dynamically from models config
     dropout = 0.2
@@ -225,7 +237,7 @@ def run_federated_simulation(experiment_id, model_type="mlp", client_count=5,
         if current_adaptive_config is None:
             print(f"Simulation stopped by adaptive controller at round {r}.")
             break
-            
+
         client_updates = []
         total_fit_samples = 0
         round_sent = 0
@@ -235,15 +247,121 @@ def run_federated_simulation(experiment_id, model_type="mlp", client_count=5,
         round_mean_grad_norms   = []
         round_median_grad_norms = []
         round_frac_clipped      = []
-        
+
+        edge_summary = edge_registry.get_resource_summary() if edge_registry is not None else {}
+        edge_telemetry_active = bool(edge_registry is not None and edge_summary.get("edge_total_nodes", 0) > 0)
+        edge_eligible_ids = []
+        if edge_telemetry_active:
+            for client_id, node_id in edge_client_mapping.items():
+                if client_id >= client_count:
+                    continue
+                latest = edge_registry.get_latest(node_id) if edge_registry is not None else None
+                interpretation = interpret_edge_resource(latest) if latest is not None else {"eligible_for_training": False}
+                if interpretation.get("eligible_for_training", False):
+                    edge_eligible_ids.append(client_id)
+
+        # Backward-compatible fallback: if no edge telemetry exists, mirror the
+        # original non-edge federated simulation and allow all clients to participate.
+        if not edge_telemetry_active:
+            eligible_pool = list(range(client_count))
+        else:
+            eligible_pool = edge_eligible_ids if edge_eligible_ids else []
+
         # 1. Evaluate Client Participation
         participation_frac = current_adaptive_config.get("participation_fraction", 1.0)
-        num_participants = max(1, int(client_count * participation_frac))
-        
-        # Deterministic client selection based on round seed
-        rng = np.random.default_rng(seed + r * 777)
-        participating_indices = rng.choice(client_count, num_participants, replace=False)
-        participating_clients_list = [clients[i] for i in participating_indices]
+        if edge_telemetry_active:
+            if not eligible_pool:
+                participating_indices = np.array([], dtype=int)
+                participating_clients_list = []
+                print(f"Round {r}: no edge-eligible clients for FL training; skipping client updates.")
+                # Keep the global model unchanged and record the edge summary
+                new_global_parameters = [val.cpu().detach().numpy().copy() for _, val in global_model.state_dict().items()]
+                global_parameters = new_global_parameters
+                val_loss, val_metrics = evaluate_fn(r, global_parameters, config={})
+                participating_clients = 0
+                total_client_samples = 0
+                round_metrics_dict = {
+                    "round": r,
+                    "mode": "adaptive" if adaptive_mode else "static",
+                    "validation_loss": val_loss,
+                    "val_auroc": val_metrics["auroc"],
+                    "val_auprc": val_metrics["auprc"],
+                    "val_f1": val_metrics["f1"],
+                    "val_precision": val_metrics["precision"],
+                    "val_recall": val_metrics["recall"],
+                    "val_specificity": val_metrics["specificity"],
+                    "val_balanced_accuracy": val_metrics["balanced_accuracy"],
+                    "val_brier_score": val_metrics["brier_score"],
+                    "val_accuracy": val_metrics["accuracy"],
+                    "threshold": float(val_metrics.get("threshold", 0.5)),
+                    "participating_clients": 0,
+                    "total_client_samples": 0,
+                    "bytes_upstream": 0,
+                    "bytes_downstream": 0,
+                    "total_bytes": 0,
+                    "compression_ratio": float(1.0 / compression_config.get("ratio", 1.0)) if (compression_config and compression_config.get("enabled", False) and compression_config.get("ratio", 1.0) < 1.0) else 1.0,
+                    "training_time_sec": time.time() - round_start_time,
+                    "epsilon": None,
+                    "cumulative_bytes": cumulative_bytes,
+                    "privacy_budget": controller.privacy_config.get("budget_epsilon") if controller.enabled else None,
+                    "privacy_remaining": None,
+                    "communication_budget": controller.comm_config.get("budget_bytes") if controller.enabled else None,
+                    "communication_remaining": None,
+                    "previous_configuration": dict(current_adaptive_config),
+                    "selected_compression_ratio": current_adaptive_config["compression_ratio"],
+                    "selected_local_epochs": current_adaptive_config["local_epochs"],
+                    "selected_participation_fraction": current_adaptive_config["participation_fraction"],
+                    "controller_decision": None,
+                    "controller_mode": "adaptive" if adaptive_mode else "static",
+                    "edge_total_nodes": edge_summary.get("edge_total_nodes", 0),
+                    "edge_available_nodes": edge_summary.get("edge_available_nodes", 0),
+                    "edge_busy_nodes": edge_summary.get("edge_busy_nodes", 0),
+                    "edge_constrained_nodes": edge_summary.get("edge_constrained_nodes", 0),
+                    "edge_offline_nodes": edge_summary.get("edge_offline_nodes", 0),
+                    "edge_eligible_clients": 0,
+                    "edge_mean_cpu_load": edge_summary.get("edge_mean_cpu_load", 0.0),
+                    "edge_mean_memory_pressure": edge_summary.get("edge_mean_memory_pressure", 0.0),
+                    "edge_mean_network_quality": edge_summary.get("edge_mean_network_quality", 0.0),
+                    "edge_resource_pressure": edge_summary.get("edge_resource_pressure", 0.0),
+                    "edge_telemetry_active": True,
+                }
+                if controller.enabled:
+                    controller.observe(round_metrics_dict)
+                    next_config, decision_metadata = controller.select_next_configuration(state=round_metrics_dict)
+                    round_metrics_dict["controller_decision"] = decision_metadata
+                    round_metrics_dict["selected_compression_ratio"] = next_config["compression_ratio"] if next_config else round_metrics_dict["selected_compression_ratio"]
+                    round_metrics_dict["selected_local_epochs"] = next_config["local_epochs"] if next_config else round_metrics_dict["selected_local_epochs"]
+                    round_metrics_dict["selected_participation_fraction"] = next_config["participation_fraction"] if next_config else round_metrics_dict["selected_participation_fraction"]
+                    round_metrics_dict["decision_score"] = decision_metadata.get("selected_score") if decision_metadata else None
+                    if next_config is None:
+                        print(f"Adaptive controller stopped after round {r}.")
+                        current_adaptive_config = None
+                    else:
+                        current_adaptive_config = next_config
+                federated_round_metrics.append(round_metrics_dict)
+                controller_history.append({
+                    "round": r,
+                    "previous_configuration": round_metrics_dict.get("previous_configuration"),
+                    "selected_configuration": {
+                        "compression_ratio": round_metrics_dict.get("selected_compression_ratio"),
+                        "local_epochs": round_metrics_dict.get("selected_local_epochs"),
+                        "participation_fraction": round_metrics_dict.get("selected_participation_fraction"),
+                    },
+                    "decision": round_metrics_dict.get("controller_decision"),
+                    "mode": round_metrics_dict.get("mode")
+                })
+                continue
+
+            pool_size = max(1, len(eligible_pool))
+            num_participants = max(1, min(pool_size, int(pool_size * participation_frac)))
+            rng = np.random.default_rng(seed + r * 777)
+            participating_indices = rng.choice(np.array(eligible_pool, dtype=int), num_participants, replace=False)
+            participating_clients_list = [clients[i] for i in participating_indices]
+        else:
+            num_participants = max(1, int(client_count * participation_frac))
+            rng = np.random.default_rng(seed + r * 777)
+            participating_indices = rng.choice(client_count, num_participants, replace=False)
+            participating_clients_list = [clients[i] for i in participating_indices]
         
         # Track accumulated epochs for privacy accounting
         accumulated_local_epochs += current_adaptive_config.get("local_epochs", local_epochs)
@@ -303,7 +421,11 @@ def run_federated_simulation(experiment_id, model_type="mlp", client_count=5,
         total_client_samples = sum(len(c.train_dataset) for c in participating_clients_list)
         
         cumulative_bytes += round_sent + round_recv
-        
+        edge_summary = edge_registry.get_resource_summary() if edge_registry is not None else {}
+        edge_resource_pressure = edge_summary.get("edge_resource_pressure", 0.0)
+        if edge_registry is None:
+            edge_resource_pressure = 0.0
+
         # Calculate Round Epsilon (Privacy Tracking)
         dp_enabled    = (dp_config or {}).get("enabled", False)
         mechanism     = (dp_config or {}).get("mechanism", "dpsgd")
@@ -377,6 +499,20 @@ def run_federated_simulation(experiment_id, model_type="mlp", client_count=5,
         if controller.comm_config.get("budget_bytes") is not None:
             budget_bytes = float(controller.comm_config.get("budget_bytes"))
             round_metrics_dict["communication_remaining"] = max(0.0, budget_bytes - float(cumulative_bytes))
+
+        if edge_registry is not None:
+            edge_summary = edge_registry.get_resource_summary()
+            round_metrics_dict["edge_total_nodes"] = edge_summary.get("edge_total_nodes", 0)
+            round_metrics_dict["edge_available_nodes"] = edge_summary.get("edge_available_nodes", 0)
+            round_metrics_dict["edge_busy_nodes"] = edge_summary.get("edge_busy_nodes", 0)
+            round_metrics_dict["edge_constrained_nodes"] = edge_summary.get("edge_constrained_nodes", 0)
+            round_metrics_dict["edge_offline_nodes"] = edge_summary.get("edge_offline_nodes", 0)
+            round_metrics_dict["edge_eligible_clients"] = edge_summary.get("edge_eligible_clients", participating_clients)
+            round_metrics_dict["edge_mean_cpu_load"] = edge_summary.get("edge_mean_cpu_load", 0.0)
+            round_metrics_dict["edge_mean_memory_pressure"] = edge_summary.get("edge_mean_memory_pressure", 0.0)
+            round_metrics_dict["edge_mean_network_quality"] = edge_summary.get("edge_mean_network_quality", 0.0)
+            round_metrics_dict["edge_resource_pressure"] = edge_summary.get("edge_resource_pressure", 0.0)
+        round_metrics_dict["edge_telemetry_active"] = edge_telemetry_active
 
         # --- ADAPTIVE CONTROLLER OBSERVE & SELECT ---
         if controller.enabled:

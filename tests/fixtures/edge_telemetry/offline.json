@@ -1,0 +1,9 @@
+{
+  "node_id": "Hospital-Edge-04",
+  "state": "OFFLINE",
+  "cpu_load": 0,
+  "memory_pressure": 0,
+  "network_quality": 0,
+  "participation_status": "UNAVAILABLE",
+  "timestamp": "2026-09-07T12:03:00Z"
+}

@@ -1,0 +1,9 @@
+{
+  "node_id": "Hospital-Edge-03",
+  "state": "CONSTRAINED",
+  "cpu_load": 82,
+  "memory_pressure": 77,
+  "network_quality": 42,
+  "participation_status": "RESTRICTED",
+  "timestamp": "2026-09-07T12:02:00Z"
+}
