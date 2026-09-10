@@ -19,7 +19,18 @@ dist/
 # Pytest / coverage cache
 .pytest_cache/
 .mypy_cache/
+.ruff_cache/
 .coverage
+
+# Editor and temp files
+.vscode/
+.idea/
+*.tmp
+*.temp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
 
 # Jupyter Checkpoints
 .ipynb_checkpoints/
