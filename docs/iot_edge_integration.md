@@ -23,6 +23,7 @@ Next-round configuration
 ## 2. What is physically simulated
 
 - The ESP32 is simulated in Wokwi as a representative hospital edge-node resource monitor.
+- The current Wokwi implementation is a simulation of an external MCU telemetry source and does not constitute physical-hardware validation.
 - The Python project simulates federated learning clients in a local sequential runtime.
 - The ESP32 does not train the ML model. It only emits resource telemetry that is translated into a client-eligibility context for the existing FL simulation.
 
@@ -41,11 +42,44 @@ The real execution path is:
 7. The remaining round runs with the existing `round_metrics_dict`.
 8. The existing adaptive controller still owns global configuration selection via `observe(...)` and `select_next_configuration(...)`.
 
-## 4. Transport limitation
+## 4. External Telemetry Ingest Path
 
-This implementation is a deterministic fixture replay and Python-side integration layer. It does not claim a live Wokwi-to-Python network transport. If the project later adds direct device transport, that would be a separate integration layer.
+The repository now includes a minimal external ingest adapter that accepts machine-readable JSON telemetry from an external or simulated source and routes it through the existing packet-validation and registry flow.
 
-## 5. Multi-node architecture
+### Implemented
+
+- Wokwi ESP32 telemetry generation
+- machine-readable JSON telemetry emission
+- external ingest interface that accepts JSON records
+- packet-level validation and source recognition
+- sequence checking and stale detection
+- normalization through `TelemetryPacket` and `TelemetryAdapter`
+- registry update via `EdgeTelemetryRegistry`
+- controller-facing resource interpretation via `interpret_edge_resource()`
+- automated integration tests covering valid, duplicate, stale, malformed, source, and server paths
+
+### Simulated
+
+- ESP32 hardware behavior
+- telemetry values
+- Wokwi node state transitions
+- network conditions unless those values are directly measured
+
+### Not validated
+
+- physical ESP32 hardware
+- real hospital network behavior
+- real external network packet timing
+- real-time clinical deployment
+- live Wokwi-to-Python transport
+
+The ingest path is intentionally conservative: it accepts JSON exactly as an external source would provide it, but it does not claim physical hardware validation or a live network connection.
+
+## 5. Transport limitation
+
+This implementation uses a local machine-readable ingest path rather than a fake live network stack. It accepts external JSON telemetry and reuses the existing Python normalization and registry logic. This is the minimum reproducible ingest layer needed to connect Wokwi-style telemetry to the server/controller flow without claiming a real physical ESP32 deployment.
+
+## 6. Multi-node architecture
 
 One representative ESP32 simulation is treated as a single resource monitor. The Python registry supports multiple node IDs and keeps the latest telemetry for each node in memory. This allows a single simulation to model a scalable hospital deployment while still preserving deterministic testing and reproducible experiments.
 

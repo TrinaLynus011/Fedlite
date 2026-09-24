@@ -7,6 +7,14 @@ from .iot_telemetry import (
     interpret_edge_resource,
     normalize_telemetry,
 )
+from .external_ingest import ExternalTelemetryIngest
+from .telemetry_sources import (
+    HostTelemetrySource,
+    McuTelemetrySource,
+    TelemetryAdapter,
+    TelemetrySource,
+)
+from .wokwi_bridge import WokwiLaptopBridge
 
 __all__ = [
     "EdgeTelemetry",
@@ -14,4 +22,10 @@ __all__ = [
     "build_edge_client_mapping",
     "interpret_edge_resource",
     "normalize_telemetry",
+    "ExternalTelemetryIngest",
+    "WokwiLaptopBridge",
+    "TelemetrySource",
+    "HostTelemetrySource",
+    "McuTelemetrySource",
+    "TelemetryAdapter",
 ]

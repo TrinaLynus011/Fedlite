@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "author": "Trina Lynus",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "statusLed",
+      "top": -60,
+      "left": 250,
+      "attrs": {
+        "color": "green"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "stateButton",
+      "top": 160,
+      "left": 250,
+      "attrs": {
+        "color": "blue",
+        "bounce": "0"
+      }
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "oled",
+      "top": -120,
+      "left": -260,
+      "attrs": {
+        "i2cAddress": "0x3c"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+
+    [
+      "esp:2",
+      "statusLed:A",
+      "green",
+      []
+    ],
+    [
+      "statusLed:C",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+
+    [
+      "esp:4",
+      "stateButton:1.l",
+      "blue",
+      []
+    ],
+    [
+      "stateButton:2.l",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+
+    [
+      "esp:21",
+      "oled:SDA",
+      "blue",
+      []
+    ],
+    [
+      "esp:22",
+      "oled:SCL",
+      "yellow",
+      []
+    ],
+    [
+      "esp:3V3",
+      "oled:VCC",
+      "red",
+      []
+    ],
+    [
+      "esp:GND.1",
+      "oled:GND",
+      "black",
+      []
+    ]
+  ],
+  "dependencies": {}
+}

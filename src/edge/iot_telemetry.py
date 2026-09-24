@@ -7,16 +7,17 @@ from typing import Any, Dict, Iterable, List, Optional
 
 VALID_STATES = {"AVAILABLE", "BUSY", "CONSTRAINED", "OFFLINE"}
 VALID_PARTICIPATION_STATUSES = {"READY", "LIMITED", "RESTRICTED", "UNAVAILABLE"}
+VALID_SOURCES = {"host_software", "mcu_simulation", "mcu_hardware", "gateway"}
 
 
 @dataclass(frozen=True)
 class EdgeTelemetry:
-    """Normalized Wokwi-compatible ESP32 telemetry payload.
+    """Normalized edge telemetry payload.
 
-    This is intentionally a narrow schema that captures the core edge-resource
-    indicators needed by the federated client eligibility logic. The simulator is
-    not a live Wokwi transport and therefore only consumes normalized telemetry
-    records, loaded from fixtures or a replay adapter if needed.
+    The data model is intentionally narrow but source-aware. Existing FL logic
+    only consumes the normalized resource state and participation signal. The
+    additional metadata makes it possible to distinguish host-side telemetry from
+    an independent MCU simulation channel.
     """
 
     node_id: str
@@ -26,6 +27,14 @@ class EdgeTelemetry:
     network_quality: float
     participation_status: str
     timestamp: str
+    source: str = "host_software"
+    sequence_id: int = 0
+    generated_timestamp: Optional[str] = None
+    received_timestamp: Optional[str] = None
+    latency_sec: Optional[float] = None
+    stale: bool = False
+    valid: bool = True
+    rejection_reason: Optional[str] = None
 
 
 def _require_field(payload: Dict[str, Any], field: str) -> Any:
@@ -46,10 +55,11 @@ def _validate_percentage(name: str, value: Any) -> float:
 
 
 def normalize_telemetry(payload: Dict[str, Any]) -> EdgeTelemetry:
-    """Validate and normalize a raw ESP32 telemetry payload.
+    """Validate and normalize a raw edge telemetry payload.
 
     Supported states: AVAILABLE, BUSY, CONSTRAINED, OFFLINE.
     Supported participation statuses: READY, LIMITED, RESTRICTED, UNAVAILABLE.
+    Supported sources: host_software, mcu_simulation, mcu_hardware, gateway.
     """
     if payload is None:
         raise ValueError("Telemetry payload cannot be None.")
@@ -59,6 +69,10 @@ def normalize_telemetry(payload: Dict[str, Any]) -> EdgeTelemetry:
     node_id = _require_field(payload, "node_id")
     state = str(_require_field(payload, "state")).upper()
     participation_status = str(_require_field(payload, "participation_status")).upper()
+    source = str(payload.get("source", "host_software")).lower()
+    if source not in VALID_SOURCES:
+        valid = ", ".join(sorted(VALID_SOURCES))
+        raise ValueError(f"Invalid source '{source}'. Supported sources: {valid}.")
 
     if not isinstance(node_id, str) or not node_id.strip():
         raise ValueError("node_id must be a non-empty string.")
@@ -77,9 +91,19 @@ def normalize_telemetry(payload: Dict[str, Any]) -> EdgeTelemetry:
     memory_pressure = _validate_percentage("memory_pressure", _require_field(payload, "memory_pressure"))
     network_quality = _validate_percentage("network_quality", _require_field(payload, "network_quality"))
 
-    timestamp = _require_field(payload, "timestamp")
+    timestamp = payload.get("timestamp") or payload.get("generated_timestamp")
     if not isinstance(timestamp, str) or not timestamp.strip():
-        raise ValueError("timestamp must be a non-empty string.")
+        raise ValueError("timestamp or generated_timestamp must be a non-empty string.")
+
+    sequence_id = payload.get("sequence_id", 0)
+    try:
+        sequence_id = int(sequence_id)
+    except (TypeError, ValueError):
+        raise ValueError("sequence_id must be an integer.") from None
+
+    generated_timestamp = payload.get("generated_timestamp")
+    if generated_timestamp is not None and (not isinstance(generated_timestamp, str) or not generated_timestamp.strip()):
+        raise ValueError("generated_timestamp must be a non-empty string when provided.")
 
     return EdgeTelemetry(
         node_id=node_id.strip(),
@@ -89,6 +113,9 @@ def normalize_telemetry(payload: Dict[str, Any]) -> EdgeTelemetry:
         network_quality=network_quality,
         participation_status=participation_status,
         timestamp=timestamp.strip(),
+        source=source,
+        sequence_id=sequence_id,
+        generated_timestamp=(generated_timestamp.strip() if isinstance(generated_timestamp, str) else None),
     )
 
 

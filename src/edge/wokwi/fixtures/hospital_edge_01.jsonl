@@ -1,0 +1,6 @@
+# This fixture is integration-test/demo input only.
+# It is not experimental evidence and does not represent live hardware data.
+{"telemetry_version":1,"node_id":"Hospital-Edge-01","state":"AVAILABLE","cpu_load":42,"memory_pressure":31,"network_quality":82,"participation_status":"READY","sequence_id":1,"timestamp_ms":3000,"source":"mcu_simulation"}
+{"telemetry_version":1,"node_id":"Hospital-Edge-01","state":"BUSY","cpu_load":68,"memory_pressure":58,"network_quality":71,"participation_status":"LIMITED","sequence_id":2,"timestamp_ms":6000,"source":"mcu_simulation"}
+{"telemetry_version":1,"node_id":"Hospital-Edge-01","state":"CONSTRAINED","cpu_load":86,"memory_pressure":81,"network_quality":40,"participation_status":"RESTRICTED","sequence_id":3,"timestamp_ms":9000,"source":"mcu_simulation"}
+{"telemetry_version":1,"node_id":"Hospital-Edge-01","state":"OFFLINE","cpu_load":0,"memory_pressure":0,"network_quality":0,"participation_status":"UNAVAILABLE","sequence_id":4,"timestamp_ms":12000,"source":"mcu_simulation"}

@@ -19,7 +19,7 @@
     "bytes_downstream": 39944,
     "total_bytes": 79888,
     "compression_ratio": 1.0,
-    "training_time_sec": 269.94041776657104,
+    "training_time_sec": 116.75454616546631,
     "mean_grad_norm": 9.75068016747268,
     "median_grad_norm": 0.11596599403712507,
     "frac_clipped": 0.14657289299698262,
@@ -40,6 +40,17 @@
     "selected_local_epochs": 1,
     "selected_participation_fraction": 1.0,
     "controller_decision": null,
-    "controller_mode": "static"
+    "controller_mode": "static",
+    "edge_total_nodes": 0,
+    "edge_available_nodes": 0,
+    "edge_busy_nodes": 0,
+    "edge_constrained_nodes": 0,
+    "edge_offline_nodes": 0,
+    "edge_eligible_clients": 0,
+    "edge_mean_cpu_load": 0.0,
+    "edge_mean_memory_pressure": 0.0,
+    "edge_mean_network_quality": 0.0,
+    "edge_resource_pressure": 1.0,
+    "edge_telemetry_active": false
   }
 ]
